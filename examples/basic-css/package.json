@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "RSPACK_CONFIG_VALIDATE=loose-silent next",
     "build": "next build",
     "start": "next start"
   },

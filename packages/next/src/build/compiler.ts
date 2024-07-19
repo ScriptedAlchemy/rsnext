@@ -51,6 +51,7 @@ export function runCompiler(
   ]
 > {
   return new Promise((resolve, reject) => {
+    console.log(config);
     const compiler = webpack(config)
     // Ensure we use the previous inputFileSystem
     if (inputFileSystem) {

@@ -772,6 +772,7 @@ export default class MiddlewarePlugin {
   }
 
   public apply(compiler: webpack.Compiler) {
+    return;
     compiler.hooks.compilation.tap(NAME, (compilation, params) => {
       const { hooks } = params.normalModuleFactory
       /**
