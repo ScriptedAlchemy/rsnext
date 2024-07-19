@@ -7,15 +7,8 @@ export type ClientPagesLoaderOptions = {
 
 // this parameter: https://www.typescriptlang.org/docs/handbook/functions.html#this-parameters
 function nextClientPagesLoader(this: any) {
-  const pagesLoaderSpan = this.currentTraceSpan.traceChild(
-    'next-client-pages-loader'
-  )
-
-  return pagesLoaderSpan.traceFn(() => {
     const { absolutePagePath, page } =
       this.getOptions() as ClientPagesLoaderOptions
-
-    pagesLoaderSpan.setAttribute('absolutePagePath', absolutePagePath)
 
     const stringifiedPageRequest = stringifyRequest(this, absolutePagePath)
     const stringifiedPage = JSON.stringify(page)
@@ -33,7 +26,6 @@ function nextClientPagesLoader(this: any) {
       });
     }
   `
-  })
 }
 
 export default nextClientPagesLoader

@@ -363,6 +363,7 @@ export default async function getBaseWebpackConfig(
     ? '-experimental'
     : ''
 
+
   const babelConfigFile = getBabelConfigFile(dir)
 
   if (!dev && hasCustomExportOutput(config)) {
@@ -1229,12 +1230,12 @@ export default async function getBaseWebpackConfig(
       rules: [
         // Alias server-only and client-only to proper exports based on bundling layers
         {
-          issuerLayer: {
-            or: [
-              ...WEBPACK_LAYERS.GROUP.serverOnly,
-              ...WEBPACK_LAYERS.GROUP.neutralTarget,
-            ],
-          },
+          // issuerLayer: {
+          //   or: [
+          //     ...WEBPACK_LAYERS.GROUP.serverOnly,
+          //     ...WEBPACK_LAYERS.GROUP.neutralTarget,
+          //   ],
+          // },
           resolve: {
             // Error on client-only but allow server-only
             alias: createServerOnlyClientOnlyAliases(true),

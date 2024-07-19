@@ -7,6 +7,7 @@ import type { UrlObject } from 'url'
 import type { RouteDefinition } from '../route-definitions/route-definition'
 
 import { webpack, StringXor } from 'next/dist/compiled/webpack/webpack'
+import {util} from "@rspack/core"
 import { getOverlayMiddleware } from '../../client/components/react-dev-overlay/server/middleware'
 import { WebpackHotMiddleware } from './hot-middleware'
 import { join, relative, isAbsolute, posix } from 'path'
@@ -768,7 +769,6 @@ export default class HotReloaderWebpack implements NextJsHotReloaderInterface {
           Object.keys(entries).map(async (entryKey) => {
             const entryData = entries[entryKey]
             const { bundlePath, dispose } = entryData
-
             const result =
               /^(client|server|edge-server)@(app|pages|root)@(.*)/g.exec(
                 entryKey
@@ -1130,8 +1130,8 @@ export default class HotReloaderWebpack implements NextJsHotReloaderInterface {
                     stats.chunkGraph.getChunkModulesIterable(chunk)
 
                   let hasCSSModuleChanges = false
-                  let chunksHash = new StringXor()
-                  let chunksHashServerLayer = new StringXor()
+                  let chunksHash =  util.createHash('md4')
+                  let chunksHashServerLayer =  util.createHash('md4');
 
                   modsIterable.forEach((mod: any) => {
                     if (

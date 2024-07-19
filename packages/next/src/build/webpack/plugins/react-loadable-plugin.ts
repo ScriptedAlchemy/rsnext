@@ -169,20 +169,21 @@ export class ReactLoadablePlugin {
     const projectSrcDir = this.pagesOrAppDir
       ? path.dirname(this.pagesOrAppDir)
       : undefined
-    const manifest = buildManifest(
-      compiler,
-      compilation,
-      projectSrcDir,
-      this.dev
-    )
 
-    assets[this.filename] = new sources.RawSource(
-      JSON.stringify(manifest, null, 2)
-    )
+    // const manifest = buildManifest(
+    //   compiler,
+    //   compilation,
+    //   projectSrcDir,
+    //   this.dev
+    // )
+    //
+    // assets[this.filename] = new sources.RawSource(
+    //   JSON.stringify(manifest, null, 2)
+    // )
     if (this.runtimeAsset) {
       assets[this.runtimeAsset] = new sources.RawSource(
         `self.__REACT_LOADABLE_MANIFEST=${JSON.stringify(
-          JSON.stringify(manifest)
+          JSON.stringify({  })
         )}`
       )
     }
