@@ -104,6 +104,7 @@ export async function webpackBuildImpl(
       })
     )
 
+  console.log(entrypoints);
   const commonWebpackOptions = {
     isServer: false,
     buildId: NextBuildContext.buildId!,
