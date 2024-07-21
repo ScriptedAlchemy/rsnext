@@ -221,9 +221,23 @@ export class ProfilingPlugin {
               traceChild() {
                 return {
                   traceFn(fn: any) {
-                    return fn()
+                    return fn();
+                  },
+                  traceAsyncFn(fn:any){
+                    return fn();
                   },
                   setAttribute() {},
+                  traceChild(){
+                    return {
+                      traceFn(fn: any) {
+                        return fn();
+                       },
+                       traceAsyncFn(fn:any){
+                      return fn();
+                      },
+                       setAttribute() {},
+                    }
+                  }
                 }
               },
             }
