@@ -3,3 +3,4 @@ packages:
   - 'bench/*'
   - 'packages/next-swc/crates/next-core/js'
   - 'examples/next-css'
+  - 'examples/federation-single-app'
