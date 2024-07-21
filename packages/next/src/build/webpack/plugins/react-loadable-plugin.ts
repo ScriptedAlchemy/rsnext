@@ -134,9 +134,9 @@ function buildManifest(
       }
     }
   }
-  for (const module of compilation.modules) {
-    module.blocks.forEach(handleBlock)
-  }
+  // for (const module of compilation.modules) {
+  //   module.blocks.forEach(handleBlock)
+  // }
 
   manifest = Object.keys(manifest)
     .sort()

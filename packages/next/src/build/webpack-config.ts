@@ -922,8 +922,9 @@ export default async function getBaseWebpackConfig(
                 context,
                 request,
                 dependencyType,
-                contextInfo.issuerLayer as WebpackLayerName,
+                contextInfo?.issuerLayer as WebpackLayerName,
                 (options) => {
+                  return true
                   const resolveFunction = getResolve(options)
                   return (resolveContext: string, requestToResolve: string) =>
                     new Promise((resolve, reject) => {
@@ -1037,7 +1038,6 @@ export default async function getBaseWebpackConfig(
           }): boolean {
             return (
               !module.type?.startsWith('css') &&
-              module.size() > 160000 &&
               /node_modules[/\\]/.test(module.nameForCondition() || '')
             )
           },
@@ -1104,35 +1104,35 @@ export default async function getBaseWebpackConfig(
           const {
             TerserPlugin,
           } = require('./webpack/plugins/terser-webpack-plugin/src/index.js')
-          new TerserPlugin({
-            terserOptions: {
-              ...terserOptions,
-              compress: {
-                ...terserOptions.compress,
-              },
-              mangle: {
-                ...terserOptions.mangle,
-              },
-            },
-          }).apply(compiler)
+          // new TerserPlugin({
+          //   terserOptions: {
+          //     ...terserOptions,
+          //     compress: {
+          //       ...terserOptions.compress,
+          //     },
+          //     mangle: {
+          //       ...terserOptions.mangle,
+          //     },
+          //   },
+          // }).apply(compiler)
         },
         // Minify CSS
         (compiler: webpack.Compiler) => {
           const {
             CssMinimizerPlugin,
           } = require('./webpack/plugins/css-minimizer-plugin')
-          new CssMinimizerPlugin({
-            postcssOptions: {
-              map: {
-                // `inline: false` generates the source map in a separate file.
-                // Otherwise, the CSS file is needlessly large.
-                inline: false,
-                // `annotation: false` skips appending the `sourceMappingURL`
-                // to the end of the CSS file. Webpack already handles this.
-                annotation: false,
-              },
-            },
-          }).apply(compiler)
+          // new CssMinimizerPlugin({
+          //   postcssOptions: {
+          //     map: {
+          //       // `inline: false` generates the source map in a separate file.
+          //       // Otherwise, the CSS file is needlessly large.
+          //       inline: false,
+          //       // `annotation: false` skips appending the `sourceMappingURL`
+          //       // to the end of the CSS file. Webpack already handles this.
+          //       annotation: false,
+          //     },
+          //   },
+          // }).apply(compiler)
         },
       ],
     },
@@ -1740,7 +1740,7 @@ export default async function getBaseWebpackConfig(
               resource.request,
               '.shared-runtime'
             )
-            const layer = resource.contextInfo.issuerLayer
+            const layer = 'pages' as string
             let runtime
 
             switch (layer) {
@@ -1757,7 +1757,7 @@ export default async function getBaseWebpackConfig(
           }
         ),
       dev && new MemoryWithGcCachePlugin({ maxGenerations: 5 }),
-      dev && isClient && new ReactRefreshWebpackPlugin(webpack),
+      // dev && isClient && new ReactRefreshWebpackPlugin(webpack),
       // Makes sure `Buffer` and `process` are polyfilled in client and flight bundles (same behavior as webpack 4)
       (isClient || isEdgeServer) &&
         new webpack.ProvidePlugin({
@@ -1788,7 +1788,7 @@ export default async function getBaseWebpackConfig(
           runtimeAsset: `server/${MIDDLEWARE_REACT_LOADABLE_MANIFEST}.js`,
           dev,
         }),
-      (isClient || isEdgeServer) && new DropClientPage(),
+      //  (isClient || isEdgeServer) && new DropClientPage(),
       isNodeServer &&
         !dev &&
         new (require('./webpack/plugins/next-trace-entrypoints-plugin')
@@ -1823,9 +1823,9 @@ export default async function getBaseWebpackConfig(
             const { NextJsRequireCacheHotReloader } =
               require('./webpack/plugins/nextjs-require-cache-hot-reloader') as typeof import('./webpack/plugins/nextjs-require-cache-hot-reloader')
             const devPlugins: any[] = [
-              new NextJsRequireCacheHotReloader({
-                serverComponents: hasAppDir,
-              }),
+              // new NextJsRequireCacheHotReloader({
+              //   serverComponents: hasAppDir,
+              // }),
             ]
 
             if (isClient || isEdgeServer) {
@@ -1876,11 +1876,11 @@ export default async function getBaseWebpackConfig(
             require('./webpack/plugins/font-stylesheet-gathering-plugin') as {
               FontStylesheetGatheringPlugin: typeof import('./webpack/plugins/font-stylesheet-gathering-plugin').FontStylesheetGatheringPlugin
             }
-          return new FontStylesheetGatheringPlugin({
-            adjustFontFallbacks: config.experimental.adjustFontFallbacks,
-            adjustFontFallbacksWithSizeAdjust:
-              config.experimental.adjustFontFallbacksWithSizeAdjust,
-          })
+          // return new FontStylesheetGatheringPlugin({
+          //   adjustFontFallbacks: config.experimental.adjustFontFallbacks,
+          //   adjustFontFallbacksWithSizeAdjust:
+          //     config.experimental.adjustFontFallbacksWithSizeAdjust,
+          // })
         })(),
       new WellKnownErrorsPlugin(),
       isClient &&
@@ -2266,22 +2266,22 @@ export default async function getBaseWebpackConfig(
     const webpack5Config = webpackConfig as webpack.Configuration
 
     // disable lazy compilation of entries as next.js has it's own method here
-    if (webpack5Config.experiments?.lazyCompilation === true) {
-      webpack5Config.experiments.lazyCompilation = {
-        entries: false,
-      }
-    } else if (
-      typeof webpack5Config.experiments?.lazyCompilation === 'object' &&
-      webpack5Config.experiments.lazyCompilation.entries !== false
-    ) {
-      webpack5Config.experiments.lazyCompilation.entries = false
-    }
+    // if (webpack5Config.experiments?.lazyCompilation === true) {
+    //   webpack5Config.experiments.lazyCompilation = {
+    //     entries: false,
+    //   }
+    // } else if (
+    //   typeof webpack5Config.experiments?.lazyCompilation === 'object' &&
+    //   webpack5Config.experiments.lazyCompilation.entries !== false
+    // ) {
+    //   webpack5Config.experiments.lazyCompilation.entries = false
+    // }
 
-    if (typeof (webpackConfig as any).then === 'function') {
-      console.warn(
-        '> Promise returned in next config. https://nextjs.org/docs/messages/promise-in-next-config'
-      )
-    }
+    // if (typeof (webpackConfig as any).then === 'function') {
+    //   console.warn(
+    //     '> Promise returned in next config. https://nextjs.org/docs/messages/promise-in-next-config'
+    //   )
+    // }
   }
 
   const rules = webpackConfig.module?.rules || []

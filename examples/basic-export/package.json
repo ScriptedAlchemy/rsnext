@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
+    "dev": "RSPACK_CONFIG_VALIDATE=loose-silent next",
+    "build": "RSPACK_CONFIG_VALIDATE=loose-silent next build",
     "start": "serve out"
   },
   "dependencies": {

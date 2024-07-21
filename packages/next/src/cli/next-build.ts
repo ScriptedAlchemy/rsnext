@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('source-map-support').install();
 
 import '../server/lib/cpu-profile'
 import { existsSync } from 'fs'

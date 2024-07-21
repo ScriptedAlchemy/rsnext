@@ -133,6 +133,7 @@ export async function requirePage(
 
 export function requireFontManifest(distDir: string) {
   const serverBuildPath = path.join(distDir, SERVER_DIRECTORY)
+  return {}
   const fontManifest = loadManifest(
     path.join(serverBuildPath, AUTOMATIC_FONT_OPTIMIZATION_MANIFEST)
   ) as FontManifest
