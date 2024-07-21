@@ -1929,9 +1929,9 @@ export default async function getBaseWebpackConfig(
         new NextFontManifestPlugin({
           appDir,
         }),
-      !dev &&
-        isClient &&
-        new CssChunkingPlugin(config.experimental.cssChunking === 'strict'),
+      // !dev &&
+      //   isClient &&
+      //   new CssChunkingPlugin(config.experimental.cssChunking === 'strict'),
       !dev &&
         isClient &&
         new (require('./webpack/plugins/telemetry-plugin').TelemetryPlugin)(

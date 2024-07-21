@@ -588,47 +588,47 @@ export const css = curry(async function css(
   }
 
   // Enable full mini-css-extract-plugin hmr for prod mode pages or app dir
-  // if (ctx.isClient && (ctx.isProduction || ctx.hasAppDir)) {
-  //   // Extract CSS as CSS file(s) in the client-side production bundle.
-  //   const MiniCssExtractPlugin =
-  //     require('../../../plugins/mini-css-extract-plugin').default
-  //   fns.push(
-  //     plugin(
-  //       // @ts-ignore webpack 5 compat
-  //       new MiniCssExtractPlugin({
-  //         filename: ctx.isProduction
-  //           ? 'static/css/[contenthash].css'
-  //           : 'static/css/[name].css',
-  //         chunkFilename: ctx.isProduction
-  //           ? 'static/css/[contenthash].css'
-  //           : 'static/css/[name].css',
-  //         // Next.js guarantees that CSS order "doesn't matter", due to imposed
-  //         // restrictions:
-  //         // 1. Global CSS can only be defined in a single entrypoint (_app)
-  //         // 2. CSS Modules generate scoped class names by default and cannot
-  //         //    include Global CSS (:global() selector).
-  //         //
-  //         // While not a perfect guarantee (e.g. liberal use of `:global()`
-  //         // selector), this assumption is required to code-split CSS.
-  //         //
-  //         // If this warning were to trigger, it'd be unactionable by the user,
-  //         // but likely not valid -- so we disable it.
-  //         ignoreOrder: true,
-  //         insert: function (linkTag: HTMLLinkElement) {
-  //           if (typeof _N_E_STYLE_LOAD === 'function') {
-  //             const { href, onload, onerror } = linkTag
-  //             _N_E_STYLE_LOAD(new URL(href).pathname).then(
-  //               () => onload?.call(linkTag, { type: 'load' } as Event),
-  //               () => onerror?.call(linkTag, {} as Event)
-  //             )
-  //           } else {
-  //             document.head.appendChild(linkTag)
-  //           }
-  //         },
-  //       })
-  //     )
-  //   )
-  // }
+  if (ctx.isClient && (ctx.isProduction || ctx.hasAppDir)) {
+    // Extract CSS as CSS file(s) in the client-side production bundle.
+    const MiniCssExtractPlugin =
+      require('@rspack/core').CssExtractRspackPlugin;
+    fns.push(
+      plugin(
+        // @ts-ignore webpack 5 compat
+        new MiniCssExtractPlugin({
+          filename: ctx.isProduction
+            ? 'static/css/[contenthash].css'
+            : 'static/css/[name].css',
+          chunkFilename: ctx.isProduction
+            ? 'static/css/[contenthash].css'
+            : 'static/css/[name].css',
+          // Next.js guarantees that CSS order "doesn't matter", due to imposed
+          // restrictions:
+          // 1. Global CSS can only be defined in a single entrypoint (_app)
+          // 2. CSS Modules generate scoped class names by default and cannot
+          //    include Global CSS (:global() selector).
+          //
+          // While not a perfect guarantee (e.g. liberal use of `:global()`
+          // selector), this assumption is required to code-split CSS.
+          //
+          // If this warning were to trigger, it'd be unactionable by the user,
+          // but likely not valid -- so we disable it.
+          ignoreOrder: true,
+          insert: function (linkTag: HTMLLinkElement) {
+            if (typeof _N_E_STYLE_LOAD === 'function') {
+              const { href, onload, onerror } = linkTag
+              _N_E_STYLE_LOAD(new URL(href).pathname).then(
+                () => onload?.call(linkTag, { type: 'load' } as Event),
+                () => onerror?.call(linkTag, {} as Event)
+              )
+            } else {
+              document.head.appendChild(linkTag)
+            }
+          },
+        })
+      )
+    )
+  }
 
   const fn = pipe(...fns)
   return fn(config)
