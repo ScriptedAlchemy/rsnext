@@ -2266,22 +2266,22 @@ export default async function getBaseWebpackConfig(
     const webpack5Config = webpackConfig as webpack.Configuration
 
     // disable lazy compilation of entries as next.js has it's own method here
-    // if (webpack5Config.experiments?.lazyCompilation === true) {
-    //   webpack5Config.experiments.lazyCompilation = {
-    //     entries: false,
-    //   }
-    // } else if (
-    //   typeof webpack5Config.experiments?.lazyCompilation === 'object' &&
-    //   webpack5Config.experiments.lazyCompilation.entries !== false
-    // ) {
-    //   webpack5Config.experiments.lazyCompilation.entries = false
-    // }
+    if (webpack5Config.experiments?.lazyCompilation === true) {
+      webpack5Config.experiments.lazyCompilation = {
+        entries: false,
+      }
+    } else if (
+      typeof webpack5Config.experiments?.lazyCompilation === 'object' &&
+      webpack5Config.experiments.lazyCompilation.entries !== false
+    ) {
+      webpack5Config.experiments.lazyCompilation.entries = false
+    }
 
-    // if (typeof (webpackConfig as any).then === 'function') {
-    //   console.warn(
-    //     '> Promise returned in next config. https://nextjs.org/docs/messages/promise-in-next-config'
-    //   )
-    // }
+    if (typeof (webpackConfig as any).then === 'function') {
+      console.warn(
+        '> Promise returned in next config. https://nextjs.org/docs/messages/promise-in-next-config'
+      )
+    }
   }
 
   const rules = webpackConfig.module?.rules || []
