@@ -1,19 +1,20 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "es2017",
-    "jsx": "preserve",
-    "module": "esnext",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts"],
-  "exclude": ["node_modules", "jest.config.ts"]
+  "include": ["next-env.d.ts", "environment.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
