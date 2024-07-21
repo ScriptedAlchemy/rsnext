@@ -924,7 +924,7 @@ export default async function getBaseWebpackConfig(
                 dependencyType,
                 contextInfo?.issuerLayer as WebpackLayerName,
                 (options) => {
-                  return true
+                  return true as any;
                   const resolveFunction = getResolve(options)
                   return (resolveContext: string, requestToResolve: string) =>
                     new Promise((resolve, reject) => {

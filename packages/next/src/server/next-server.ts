@@ -791,7 +791,7 @@ export default class NextNodeServer extends BaseServer<
   }
 
   protected getFontManifest(): FontManifest {
-    return requireFontManifest(this.distDir)
+    return requireFontManifest(this.distDir) as any;
   }
 
   protected getNextFontManifest(): NextFontManifest | undefined {
