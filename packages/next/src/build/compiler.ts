@@ -51,6 +51,9 @@ export function runCompiler(
   ]
 > {
   return new Promise((resolve, reject) => {
+    if(config.name === 'client'){
+       debugger;
+    }
     const compiler = webpack(config)
     // Ensure we use the previous inputFileSystem
     if (inputFileSystem) {

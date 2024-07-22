@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import css from "./hello-world.module.css";
-console.log('css:',css);
 export default function HelloWorld() {
+  useEffect(() => {
+    (window.AbortController as any).log('rspack:',css);
+  },[])
   return (
     <div className={css.hello}>
       Hello World, I am being styled using CSS Modules!

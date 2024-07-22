@@ -19,7 +19,7 @@ function nextClientPagesLoader(this: any) {
 
     const stringifiedPageRequest = stringifyRequest(this, absolutePagePath)
     const stringifiedPage = JSON.stringify(page)
-
+    console.log('page:', stringifiedPage, stringifiedPageRequest);
     return `
     (window.__NEXT_P = window.__NEXT_P || []).push([
       ${stringifiedPage},

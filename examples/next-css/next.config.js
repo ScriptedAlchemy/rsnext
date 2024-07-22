@@ -1,11 +1,8 @@
-// @ts-check
-
-/**
- * @type {import('next').NextConfig}
- */
-const nextConfig = {
-    output: "export",
-  };
-  
-module.exports = nextConfig;
-  
+module.exports = {
+    webpack: (config, options) => {
+      config.optimization.minimize = false;
+      config.optimization.moduleIds = 'named';
+      config.optimization.chunkIds = 'named';
+      return config;  
+    },
+}
