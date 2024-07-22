@@ -1,0 +1,45 @@
+{
+  "name": "nextjs-blog-theme",
+  "description": "A customizable Next.js and Tailwind blog starter. Designed by the Bejamas agency.",
+  "author": "Bejamas and Netlify Inc.",
+  "contributors": [
+    "Charlie Gerard",
+    "Prince Wilson",
+    "Tara Manicsic",
+    "Thom Krupa"
+  ],
+  "homepage": "https://github.com/netlify-templates/nextjs-blog-theme",
+  "bugs": {
+    "url": "https://github.com/netlify-templates/nextjs-blog-theme/issues"
+  },
+  "scripts": {
+    "dev": "next",
+    "dev:watch": "next-remote-watch ./posts",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mapbox/rehype-prism": "^0.9.0",
+    "@tailwindcss/typography": "^0.5.12",
+    "classnames": "^2.3.1",
+    "gray-matter": "^4.0.3",
+    "next": "^14.1.4",
+    "next-mdx-remote": "^5.0.0",
+    "next-remote-watch": "2.0.0",
+    "prismjs": "^1.29.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remark-gfm": "^4.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.1.4",
+    "eslint-config-prettier": "^9.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
+  },
+  "license": "MIT"
+}
