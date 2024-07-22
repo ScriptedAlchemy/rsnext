@@ -164,7 +164,7 @@
     "@next/swc": "15.0.0-canary.56",
     "@opentelemetry/api": "1.6.0",
     "@playwright/test": "1.41.2",
-    "@rspack/core": "alpha",
+    "@rspack/core": "1.0.0-alpha.5",
     "@swc/core": "1.6.6",
     "@swc/types": "0.1.7",
     "@taskr/clear": "1.1.0",

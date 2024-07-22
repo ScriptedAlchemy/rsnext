@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import css from "./hello-world.module.css";
 export default function HelloWorld() {
   useEffect(() => {
-    (window.AbortController as any).log('rspack:',css);
+    console.log('started');
   },[])
   return (
     <div className={css.hello}>

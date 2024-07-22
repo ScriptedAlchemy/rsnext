@@ -1,0 +1,2062 @@
+[
+  {
+    "issuerLayer": {
+      "or": [
+        "rsc",
+        "action-browser",
+        "app-metadata-route",
+        "instrument",
+        "middleware",
+        "api"
+      ]
+    },
+    "resolve": {
+      "alias": {
+        "server-only$": "next/dist/compiled/server-only/empty",
+        "client-only$": "next/dist/compiled/client-only/error",
+        "next/dist/compiled/server-only$": "next/dist/compiled/server-only/empty",
+        "next/dist/compiled/client-only$": "next/dist/compiled/client-only/error"
+      }
+    }
+  },
+  {
+    "issuerLayer": {
+      "not": [
+        "rsc",
+        "action-browser",
+        "app-metadata-route",
+        "instrument",
+        "middleware",
+        "api"
+      ]
+    },
+    "resolve": {
+      "alias": {
+        "server-only$": "next/dist/compiled/server-only/index",
+        "client-only$": "next/dist/compiled/client-only/index",
+        "next/dist/compiled/client-only$": "next/dist/compiled/client-only/index",
+        "next/dist/compiled/server-only": "next/dist/compiled/server-only/index"
+      }
+    }
+  },
+  {
+    "test": [
+      {},
+      {}
+    ],
+    "loader": "next-invalid-import-error-loader",
+    "issuerLayer": {
+      "or": [
+        "rsc",
+        "action-browser",
+        "app-metadata-route",
+        "instrument",
+        "middleware"
+      ]
+    },
+    "options": {
+      "message": "'client-only' cannot be imported from a Server Component module. It should only be used from a Client Component."
+    }
+  },
+  {
+    "test": [
+      {},
+      {}
+    ],
+    "loader": "next-invalid-import-error-loader",
+    "issuerLayer": {
+      "not": [
+        "rsc",
+        "action-browser",
+        "app-metadata-route",
+        "instrument",
+        "middleware",
+        "api"
+      ]
+    },
+    "options": {
+      "message": "'server-only' cannot be imported from a Client Component module. It should only be used from a Server Component."
+    }
+  },
+  {
+    "test": [
+      {},
+      {}
+    ],
+    "loader": "empty-loader",
+    "issuerLayer": {
+      "or": [
+        "api"
+      ]
+    }
+  },
+  {
+    "test": {},
+    "resolve": {
+      "fullySpecified": false
+    }
+  },
+  {
+    "oneOf": [
+      {
+        "test": {
+          "or": [
+            {},
+            {}
+          ]
+        },
+        "include": [
+          "/Users/bytedance/github/rsnext/examples/next-css",
+          {},
+          {},
+          {},
+          {}
+        ],
+        "issuerLayer": "api",
+        "parser": {
+          "url": true
+        },
+        "use": {
+          "loader": "next-swc-loader",
+          "options": {
+            "isServer": false,
+            "rootDir": "/Users/bytedance/github/rsnext/examples/next-css",
+            "pagesDir": "/Users/bytedance/github/rsnext/examples/next-css/pages",
+            "hasReactRefresh": false,
+            "nextConfig": {
+              "env": {},
+              "eslint": {
+                "ignoreDuringBuilds": false
+              },
+              "typescript": {
+                "ignoreBuildErrors": false,
+                "tsconfigPath": "tsconfig.json"
+              },
+              "distDir": ".next",
+              "cleanDistDir": true,
+              "assetPrefix": "",
+              "cacheMaxMemorySize": 52428800,
+              "configOrigin": "next.config.js",
+              "useFileSystemPublicRoutes": true,
+              "generateEtags": true,
+              "pageExtensions": [
+                "tsx",
+                "ts",
+                "jsx",
+                "js"
+              ],
+              "poweredByHeader": true,
+              "compress": true,
+              "images": {
+                "deviceSizes": [
+                  640,
+                  750,
+                  828,
+                  1080,
+                  1200,
+                  1920,
+                  2048,
+                  3840
+                ],
+                "imageSizes": [
+                  16,
+                  32,
+                  48,
+                  64,
+                  96,
+                  128,
+                  256,
+                  384
+                ],
+                "path": "/_next/image",
+                "loader": "default",
+                "loaderFile": "",
+                "domains": [],
+                "disableStaticImages": false,
+                "minimumCacheTTL": 60,
+                "formats": [
+                  "image/webp"
+                ],
+                "dangerouslyAllowSVG": false,
+                "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+                "contentDispositionType": "attachment",
+                "remotePatterns": [],
+                "unoptimized": false
+              },
+              "devIndicators": {
+                "buildActivity": true,
+                "buildActivityPosition": "bottom-right"
+              },
+              "onDemandEntries": {
+                "maxInactiveAge": 60000,
+                "pagesBufferLength": 5
+              },
+              "amp": {
+                "canonicalBase": ""
+              },
+              "basePath": "",
+              "sassOptions": {},
+              "trailingSlash": false,
+              "i18n": null,
+              "productionBrowserSourceMaps": false,
+              "optimizeFonts": true,
+              "excludeDefaultMomentLocales": true,
+              "serverRuntimeConfig": {},
+              "publicRuntimeConfig": {},
+              "reactProductionProfiling": false,
+              "reactStrictMode": null,
+              "httpAgentOptions": {
+                "keepAlive": true
+              },
+              "staticPageGenerationTimeout": 60,
+              "modularizeImports": {
+                "@mui/icons-material": {
+                  "transform": "@mui/icons-material/{{member}}"
+                },
+                "lodash": {
+                  "transform": "lodash/{{member}}"
+                }
+              },
+              "experimental": {
+                "flyingShuttle": false,
+                "prerenderEarlyExit": true,
+                "serverMinification": true,
+                "serverSourceMaps": false,
+                "linkNoTouchStart": false,
+                "caseSensitiveRoutes": false,
+                "preloadEntriesOnStart": true,
+                "clientRouterFilter": true,
+                "clientRouterFilterRedirects": false,
+                "fetchCacheKeyPrefix": "",
+                "middlewarePrefetch": "flexible",
+                "optimisticClientCache": true,
+                "manualClientBasePath": false,
+                "cpus": 13,
+                "memoryBasedWorkersCount": false,
+                "isrFlushToDisk": true,
+                "workerThreads": false,
+                "optimizeCss": false,
+                "nextScriptWorkers": false,
+                "scrollRestoration": false,
+                "externalDir": false,
+                "disableOptimizedLoading": false,
+                "gzipSize": true,
+                "craCompat": false,
+                "esmExternals": true,
+                "fullySpecified": false,
+                "outputFileTracingRoot": "/Users/bytedance/github/rsnext",
+                "swcTraceProfiling": false,
+                "forceSwcTransforms": false,
+                "largePageDataBytes": 128000,
+                "adjustFontFallbacks": false,
+                "adjustFontFallbacksWithSizeAdjust": false,
+                "typedRoutes": false,
+                "instrumentationHook": false,
+                "parallelServerCompiles": false,
+                "parallelServerBuildTraces": false,
+                "ppr": false,
+                "webpackMemoryOptimizations": false,
+                "optimizeServerReact": true,
+                "useEarlyImport": false,
+                "staleTimes": {
+                  "dynamic": 0,
+                  "static": 300
+                },
+                "after": false,
+                "optimizePackageImports": [
+                  "lucide-react",
+                  "date-fns",
+                  "lodash-es",
+                  "ramda",
+                  "antd",
+                  "react-bootstrap",
+                  "ahooks",
+                  "@ant-design/icons",
+                  "@headlessui/react",
+                  "@headlessui-float/react",
+                  "@heroicons/react/20/solid",
+                  "@heroicons/react/24/solid",
+                  "@heroicons/react/24/outline",
+                  "@visx/visx",
+                  "@tremor/react",
+                  "rxjs",
+                  "@mui/material",
+                  "@mui/icons-material",
+                  "recharts",
+                  "react-use",
+                  "effect",
+                  "@effect/schema",
+                  "@effect/platform",
+                  "@effect/platform-node",
+                  "@effect/platform-browser",
+                  "@effect/platform-bun",
+                  "@effect/sql",
+                  "@effect/sql-mssql",
+                  "@effect/sql-mysql2",
+                  "@effect/sql-pg",
+                  "@effect/sql-squlite-node",
+                  "@effect/sql-squlite-bun",
+                  "@effect/sql-squlite-wasm",
+                  "@effect/sql-squlite-react-native",
+                  "@effect/rpc",
+                  "@effect/rpc-http",
+                  "@effect/typeclass",
+                  "@effect/experimental",
+                  "@effect/opentelemetry",
+                  "@material-ui/core",
+                  "@material-ui/icons",
+                  "@tabler/icons-react",
+                  "mui-core",
+                  "react-icons/ai",
+                  "react-icons/bi",
+                  "react-icons/bs",
+                  "react-icons/cg",
+                  "react-icons/ci",
+                  "react-icons/di",
+                  "react-icons/fa",
+                  "react-icons/fa6",
+                  "react-icons/fc",
+                  "react-icons/fi",
+                  "react-icons/gi",
+                  "react-icons/go",
+                  "react-icons/gr",
+                  "react-icons/hi",
+                  "react-icons/hi2",
+                  "react-icons/im",
+                  "react-icons/io",
+                  "react-icons/io5",
+                  "react-icons/lia",
+                  "react-icons/lib",
+                  "react-icons/lu",
+                  "react-icons/md",
+                  "react-icons/pi",
+                  "react-icons/ri",
+                  "react-icons/rx",
+                  "react-icons/si",
+                  "react-icons/sl",
+                  "react-icons/tb",
+                  "react-icons/tfi",
+                  "react-icons/ti",
+                  "react-icons/vsc",
+                  "react-icons/wi"
+                ]
+              },
+              "bundlePagesRouterDependencies": false,
+              "configFile": "/Users/bytedance/github/rsnext/examples/next-css/next.config.js",
+              "configFileName": "next.config.js"
+            },
+            "jsConfig": {
+              "compilerOptions": {
+                "target": 1,
+                "lib": [
+                  "lib.dom.d.ts",
+                  "lib.dom.iterable.d.ts",
+                  "lib.esnext.d.ts"
+                ],
+                "allowJs": true,
+                "skipLibCheck": true,
+                "strict": true,
+                "forceConsistentCasingInFileNames": true,
+                "noEmit": true,
+                "esModuleInterop": true,
+                "module": 99,
+                "moduleResolution": 2,
+                "resolveJsonModule": true,
+                "isolatedModules": true,
+                "jsx": 1,
+                "incremental": true
+              }
+            },
+            "transpilePackages": [
+              "geist",
+              "lucide-react",
+              "date-fns",
+              "lodash-es",
+              "ramda",
+              "antd",
+              "react-bootstrap",
+              "ahooks",
+              "@ant-design/icons",
+              "@headlessui/react",
+              "@headlessui-float/react",
+              "@heroicons/react/20/solid",
+              "@heroicons/react/24/solid",
+              "@heroicons/react/24/outline",
+              "@visx/visx",
+              "@tremor/react",
+              "rxjs",
+              "@mui/material",
+              "@mui/icons-material",
+              "recharts",
+              "react-use",
+              "effect",
+              "@effect/schema",
+              "@effect/platform",
+              "@effect/platform-node",
+              "@effect/platform-browser",
+              "@effect/platform-bun",
+              "@effect/sql",
+              "@effect/sql-mssql",
+              "@effect/sql-mysql2",
+              "@effect/sql-pg",
+              "@effect/sql-squlite-node",
+              "@effect/sql-squlite-bun",
+              "@effect/sql-squlite-wasm",
+              "@effect/sql-squlite-react-native",
+              "@effect/rpc",
+              "@effect/rpc-http",
+              "@effect/typeclass",
+              "@effect/experimental",
+              "@effect/opentelemetry",
+              "@material-ui/core",
+              "@material-ui/icons",
+              "@tabler/icons-react",
+              "mui-core",
+              "react-icons/ai",
+              "react-icons/bi",
+              "react-icons/bs",
+              "react-icons/cg",
+              "react-icons/ci",
+              "react-icons/di",
+              "react-icons/fa",
+              "react-icons/fa6",
+              "react-icons/fc",
+              "react-icons/fi",
+              "react-icons/gi",
+              "react-icons/go",
+              "react-icons/gr",
+              "react-icons/hi",
+              "react-icons/hi2",
+              "react-icons/im",
+              "react-icons/io",
+              "react-icons/io5",
+              "react-icons/lia",
+              "react-icons/lib",
+              "react-icons/lu",
+              "react-icons/md",
+              "react-icons/pi",
+              "react-icons/ri",
+              "react-icons/rx",
+              "react-icons/si",
+              "react-icons/sl",
+              "react-icons/tb",
+              "react-icons/tfi",
+              "react-icons/ti",
+              "react-icons/vsc",
+              "react-icons/wi"
+            ],
+            "supportedBrowsers": [
+              "chrome 64",
+              "edge 79",
+              "firefox 67",
+              "opera 51",
+              "safari 12"
+            ],
+            "swcCacheDir": "/Users/bytedance/github/rsnext/examples/next-css/.next/cache/swc",
+            "serverComponents": false,
+            "bundleLayer": "api"
+          }
+        }
+      },
+      {
+        "test": {
+          "or": [
+            {},
+            {}
+          ]
+        },
+        "issuerLayer": "middleware",
+        "use": [
+          {
+            "loader": "next-flight-loader",
+            "options": {
+              "isEdgeServer": false
+            }
+          },
+          {
+            "loader": "next-swc-loader",
+            "options": {
+              "isServer": false,
+              "rootDir": "/Users/bytedance/github/rsnext/examples/next-css",
+              "pagesDir": "/Users/bytedance/github/rsnext/examples/next-css/pages",
+              "hasReactRefresh": false,
+              "nextConfig": {
+                "env": {},
+                "eslint": {
+                  "ignoreDuringBuilds": false
+                },
+                "typescript": {
+                  "ignoreBuildErrors": false,
+                  "tsconfigPath": "tsconfig.json"
+                },
+                "distDir": ".next",
+                "cleanDistDir": true,
+                "assetPrefix": "",
+                "cacheMaxMemorySize": 52428800,
+                "configOrigin": "next.config.js",
+                "useFileSystemPublicRoutes": true,
+                "generateEtags": true,
+                "pageExtensions": [
+                  "tsx",
+                  "ts",
+                  "jsx",
+                  "js"
+                ],
+                "poweredByHeader": true,
+                "compress": true,
+                "images": {
+                  "deviceSizes": [
+                    640,
+                    750,
+                    828,
+                    1080,
+                    1200,
+                    1920,
+                    2048,
+                    3840
+                  ],
+                  "imageSizes": [
+                    16,
+                    32,
+                    48,
+                    64,
+                    96,
+                    128,
+                    256,
+                    384
+                  ],
+                  "path": "/_next/image",
+                  "loader": "default",
+                  "loaderFile": "",
+                  "domains": [],
+                  "disableStaticImages": false,
+                  "minimumCacheTTL": 60,
+                  "formats": [
+                    "image/webp"
+                  ],
+                  "dangerouslyAllowSVG": false,
+                  "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+                  "contentDispositionType": "attachment",
+                  "remotePatterns": [],
+                  "unoptimized": false
+                },
+                "devIndicators": {
+                  "buildActivity": true,
+                  "buildActivityPosition": "bottom-right"
+                },
+                "onDemandEntries": {
+                  "maxInactiveAge": 60000,
+                  "pagesBufferLength": 5
+                },
+                "amp": {
+                  "canonicalBase": ""
+                },
+                "basePath": "",
+                "sassOptions": {},
+                "trailingSlash": false,
+                "i18n": null,
+                "productionBrowserSourceMaps": false,
+                "optimizeFonts": true,
+                "excludeDefaultMomentLocales": true,
+                "serverRuntimeConfig": {},
+                "publicRuntimeConfig": {},
+                "reactProductionProfiling": false,
+                "reactStrictMode": null,
+                "httpAgentOptions": {
+                  "keepAlive": true
+                },
+                "staticPageGenerationTimeout": 60,
+                "modularizeImports": {
+                  "@mui/icons-material": {
+                    "transform": "@mui/icons-material/{{member}}"
+                  },
+                  "lodash": {
+                    "transform": "lodash/{{member}}"
+                  }
+                },
+                "experimental": {
+                  "flyingShuttle": false,
+                  "prerenderEarlyExit": true,
+                  "serverMinification": true,
+                  "serverSourceMaps": false,
+                  "linkNoTouchStart": false,
+                  "caseSensitiveRoutes": false,
+                  "preloadEntriesOnStart": true,
+                  "clientRouterFilter": true,
+                  "clientRouterFilterRedirects": false,
+                  "fetchCacheKeyPrefix": "",
+                  "middlewarePrefetch": "flexible",
+                  "optimisticClientCache": true,
+                  "manualClientBasePath": false,
+                  "cpus": 13,
+                  "memoryBasedWorkersCount": false,
+                  "isrFlushToDisk": true,
+                  "workerThreads": false,
+                  "optimizeCss": false,
+                  "nextScriptWorkers": false,
+                  "scrollRestoration": false,
+                  "externalDir": false,
+                  "disableOptimizedLoading": false,
+                  "gzipSize": true,
+                  "craCompat": false,
+                  "esmExternals": true,
+                  "fullySpecified": false,
+                  "outputFileTracingRoot": "/Users/bytedance/github/rsnext",
+                  "swcTraceProfiling": false,
+                  "forceSwcTransforms": false,
+                  "largePageDataBytes": 128000,
+                  "adjustFontFallbacks": false,
+                  "adjustFontFallbacksWithSizeAdjust": false,
+                  "typedRoutes": false,
+                  "instrumentationHook": false,
+                  "parallelServerCompiles": false,
+                  "parallelServerBuildTraces": false,
+                  "ppr": false,
+                  "webpackMemoryOptimizations": false,
+                  "optimizeServerReact": true,
+                  "useEarlyImport": false,
+                  "staleTimes": {
+                    "dynamic": 0,
+                    "static": 300
+                  },
+                  "after": false,
+                  "optimizePackageImports": [
+                    "lucide-react",
+                    "date-fns",
+                    "lodash-es",
+                    "ramda",
+                    "antd",
+                    "react-bootstrap",
+                    "ahooks",
+                    "@ant-design/icons",
+                    "@headlessui/react",
+                    "@headlessui-float/react",
+                    "@heroicons/react/20/solid",
+                    "@heroicons/react/24/solid",
+                    "@heroicons/react/24/outline",
+                    "@visx/visx",
+                    "@tremor/react",
+                    "rxjs",
+                    "@mui/material",
+                    "@mui/icons-material",
+                    "recharts",
+                    "react-use",
+                    "effect",
+                    "@effect/schema",
+                    "@effect/platform",
+                    "@effect/platform-node",
+                    "@effect/platform-browser",
+                    "@effect/platform-bun",
+                    "@effect/sql",
+                    "@effect/sql-mssql",
+                    "@effect/sql-mysql2",
+                    "@effect/sql-pg",
+                    "@effect/sql-squlite-node",
+                    "@effect/sql-squlite-bun",
+                    "@effect/sql-squlite-wasm",
+                    "@effect/sql-squlite-react-native",
+                    "@effect/rpc",
+                    "@effect/rpc-http",
+                    "@effect/typeclass",
+                    "@effect/experimental",
+                    "@effect/opentelemetry",
+                    "@material-ui/core",
+                    "@material-ui/icons",
+                    "@tabler/icons-react",
+                    "mui-core",
+                    "react-icons/ai",
+                    "react-icons/bi",
+                    "react-icons/bs",
+                    "react-icons/cg",
+                    "react-icons/ci",
+                    "react-icons/di",
+                    "react-icons/fa",
+                    "react-icons/fa6",
+                    "react-icons/fc",
+                    "react-icons/fi",
+                    "react-icons/gi",
+                    "react-icons/go",
+                    "react-icons/gr",
+                    "react-icons/hi",
+                    "react-icons/hi2",
+                    "react-icons/im",
+                    "react-icons/io",
+                    "react-icons/io5",
+                    "react-icons/lia",
+                    "react-icons/lib",
+                    "react-icons/lu",
+                    "react-icons/md",
+                    "react-icons/pi",
+                    "react-icons/ri",
+                    "react-icons/rx",
+                    "react-icons/si",
+                    "react-icons/sl",
+                    "react-icons/tb",
+                    "react-icons/tfi",
+                    "react-icons/ti",
+                    "react-icons/vsc",
+                    "react-icons/wi"
+                  ]
+                },
+                "bundlePagesRouterDependencies": false,
+                "configFile": "/Users/bytedance/github/rsnext/examples/next-css/next.config.js",
+                "configFileName": "next.config.js"
+              },
+              "jsConfig": {
+                "compilerOptions": {
+                  "target": 1,
+                  "lib": [
+                    "lib.dom.d.ts",
+                    "lib.dom.iterable.d.ts",
+                    "lib.esnext.d.ts"
+                  ],
+                  "allowJs": true,
+                  "skipLibCheck": true,
+                  "strict": true,
+                  "forceConsistentCasingInFileNames": true,
+                  "noEmit": true,
+                  "esModuleInterop": true,
+                  "module": 99,
+                  "moduleResolution": 2,
+                  "resolveJsonModule": true,
+                  "isolatedModules": true,
+                  "jsx": 1,
+                  "incremental": true
+                }
+              },
+              "transpilePackages": [
+                "geist",
+                "lucide-react",
+                "date-fns",
+                "lodash-es",
+                "ramda",
+                "antd",
+                "react-bootstrap",
+                "ahooks",
+                "@ant-design/icons",
+                "@headlessui/react",
+                "@headlessui-float/react",
+                "@heroicons/react/20/solid",
+                "@heroicons/react/24/solid",
+                "@heroicons/react/24/outline",
+                "@visx/visx",
+                "@tremor/react",
+                "rxjs",
+                "@mui/material",
+                "@mui/icons-material",
+                "recharts",
+                "react-use",
+                "effect",
+                "@effect/schema",
+                "@effect/platform",
+                "@effect/platform-node",
+                "@effect/platform-browser",
+                "@effect/platform-bun",
+                "@effect/sql",
+                "@effect/sql-mssql",
+                "@effect/sql-mysql2",
+                "@effect/sql-pg",
+                "@effect/sql-squlite-node",
+                "@effect/sql-squlite-bun",
+                "@effect/sql-squlite-wasm",
+                "@effect/sql-squlite-react-native",
+                "@effect/rpc",
+                "@effect/rpc-http",
+                "@effect/typeclass",
+                "@effect/experimental",
+                "@effect/opentelemetry",
+                "@material-ui/core",
+                "@material-ui/icons",
+                "@tabler/icons-react",
+                "mui-core",
+                "react-icons/ai",
+                "react-icons/bi",
+                "react-icons/bs",
+                "react-icons/cg",
+                "react-icons/ci",
+                "react-icons/di",
+                "react-icons/fa",
+                "react-icons/fa6",
+                "react-icons/fc",
+                "react-icons/fi",
+                "react-icons/gi",
+                "react-icons/go",
+                "react-icons/gr",
+                "react-icons/hi",
+                "react-icons/hi2",
+                "react-icons/im",
+                "react-icons/io",
+                "react-icons/io5",
+                "react-icons/lia",
+                "react-icons/lib",
+                "react-icons/lu",
+                "react-icons/md",
+                "react-icons/pi",
+                "react-icons/ri",
+                "react-icons/rx",
+                "react-icons/si",
+                "react-icons/sl",
+                "react-icons/tb",
+                "react-icons/tfi",
+                "react-icons/ti",
+                "react-icons/vsc",
+                "react-icons/wi"
+              ],
+              "supportedBrowsers": [
+                "chrome 64",
+                "edge 79",
+                "firefox 67",
+                "opera 51",
+                "safari 12"
+              ],
+              "swcCacheDir": "/Users/bytedance/github/rsnext/examples/next-css/.next/cache/swc",
+              "serverComponents": true,
+              "bundleLayer": "middleware"
+            }
+          }
+        ],
+        "resolve": {
+          "mainFields": [
+            "browser",
+            "module",
+            "main"
+          ],
+          "conditionNames": [
+            "react-server",
+            "..."
+          ],
+          "alias": {
+            "react-server-dom-webpack/client$": "next/dist/compiled/react-server-dom-webpack/client",
+            "react-server-dom-webpack/client.edge$": "next/dist/compiled/react-server-dom-webpack/client.edge",
+            "react-server-dom-webpack/server.edge$": "next/dist/compiled/react-server-dom-webpack/server.edge",
+            "react-server-dom-webpack/server.node$": "next/dist/compiled/react-server-dom-webpack/server.node"
+          }
+        }
+      },
+      {
+        "test": {
+          "or": [
+            {},
+            {}
+          ]
+        },
+        "issuerLayer": "instrument",
+        "use": [
+          {
+            "loader": "next-flight-loader",
+            "options": {
+              "isEdgeServer": false
+            }
+          },
+          {
+            "loader": "next-swc-loader",
+            "options": {
+              "isServer": false,
+              "rootDir": "/Users/bytedance/github/rsnext/examples/next-css",
+              "pagesDir": "/Users/bytedance/github/rsnext/examples/next-css/pages",
+              "hasReactRefresh": false,
+              "nextConfig": {
+                "env": {},
+                "eslint": {
+                  "ignoreDuringBuilds": false
+                },
+                "typescript": {
+                  "ignoreBuildErrors": false,
+                  "tsconfigPath": "tsconfig.json"
+                },
+                "distDir": ".next",
+                "cleanDistDir": true,
+                "assetPrefix": "",
+                "cacheMaxMemorySize": 52428800,
+                "configOrigin": "next.config.js",
+                "useFileSystemPublicRoutes": true,
+                "generateEtags": true,
+                "pageExtensions": [
+                  "tsx",
+                  "ts",
+                  "jsx",
+                  "js"
+                ],
+                "poweredByHeader": true,
+                "compress": true,
+                "images": {
+                  "deviceSizes": [
+                    640,
+                    750,
+                    828,
+                    1080,
+                    1200,
+                    1920,
+                    2048,
+                    3840
+                  ],
+                  "imageSizes": [
+                    16,
+                    32,
+                    48,
+                    64,
+                    96,
+                    128,
+                    256,
+                    384
+                  ],
+                  "path": "/_next/image",
+                  "loader": "default",
+                  "loaderFile": "",
+                  "domains": [],
+                  "disableStaticImages": false,
+                  "minimumCacheTTL": 60,
+                  "formats": [
+                    "image/webp"
+                  ],
+                  "dangerouslyAllowSVG": false,
+                  "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+                  "contentDispositionType": "attachment",
+                  "remotePatterns": [],
+                  "unoptimized": false
+                },
+                "devIndicators": {
+                  "buildActivity": true,
+                  "buildActivityPosition": "bottom-right"
+                },
+                "onDemandEntries": {
+                  "maxInactiveAge": 60000,
+                  "pagesBufferLength": 5
+                },
+                "amp": {
+                  "canonicalBase": ""
+                },
+                "basePath": "",
+                "sassOptions": {},
+                "trailingSlash": false,
+                "i18n": null,
+                "productionBrowserSourceMaps": false,
+                "optimizeFonts": true,
+                "excludeDefaultMomentLocales": true,
+                "serverRuntimeConfig": {},
+                "publicRuntimeConfig": {},
+                "reactProductionProfiling": false,
+                "reactStrictMode": null,
+                "httpAgentOptions": {
+                  "keepAlive": true
+                },
+                "staticPageGenerationTimeout": 60,
+                "modularizeImports": {
+                  "@mui/icons-material": {
+                    "transform": "@mui/icons-material/{{member}}"
+                  },
+                  "lodash": {
+                    "transform": "lodash/{{member}}"
+                  }
+                },
+                "experimental": {
+                  "flyingShuttle": false,
+                  "prerenderEarlyExit": true,
+                  "serverMinification": true,
+                  "serverSourceMaps": false,
+                  "linkNoTouchStart": false,
+                  "caseSensitiveRoutes": false,
+                  "preloadEntriesOnStart": true,
+                  "clientRouterFilter": true,
+                  "clientRouterFilterRedirects": false,
+                  "fetchCacheKeyPrefix": "",
+                  "middlewarePrefetch": "flexible",
+                  "optimisticClientCache": true,
+                  "manualClientBasePath": false,
+                  "cpus": 13,
+                  "memoryBasedWorkersCount": false,
+                  "isrFlushToDisk": true,
+                  "workerThreads": false,
+                  "optimizeCss": false,
+                  "nextScriptWorkers": false,
+                  "scrollRestoration": false,
+                  "externalDir": false,
+                  "disableOptimizedLoading": false,
+                  "gzipSize": true,
+                  "craCompat": false,
+                  "esmExternals": true,
+                  "fullySpecified": false,
+                  "outputFileTracingRoot": "/Users/bytedance/github/rsnext",
+                  "swcTraceProfiling": false,
+                  "forceSwcTransforms": false,
+                  "largePageDataBytes": 128000,
+                  "adjustFontFallbacks": false,
+                  "adjustFontFallbacksWithSizeAdjust": false,
+                  "typedRoutes": false,
+                  "instrumentationHook": false,
+                  "parallelServerCompiles": false,
+                  "parallelServerBuildTraces": false,
+                  "ppr": false,
+                  "webpackMemoryOptimizations": false,
+                  "optimizeServerReact": true,
+                  "useEarlyImport": false,
+                  "staleTimes": {
+                    "dynamic": 0,
+                    "static": 300
+                  },
+                  "after": false,
+                  "optimizePackageImports": [
+                    "lucide-react",
+                    "date-fns",
+                    "lodash-es",
+                    "ramda",
+                    "antd",
+                    "react-bootstrap",
+                    "ahooks",
+                    "@ant-design/icons",
+                    "@headlessui/react",
+                    "@headlessui-float/react",
+                    "@heroicons/react/20/solid",
+                    "@heroicons/react/24/solid",
+                    "@heroicons/react/24/outline",
+                    "@visx/visx",
+                    "@tremor/react",
+                    "rxjs",
+                    "@mui/material",
+                    "@mui/icons-material",
+                    "recharts",
+                    "react-use",
+                    "effect",
+                    "@effect/schema",
+                    "@effect/platform",
+                    "@effect/platform-node",
+                    "@effect/platform-browser",
+                    "@effect/platform-bun",
+                    "@effect/sql",
+                    "@effect/sql-mssql",
+                    "@effect/sql-mysql2",
+                    "@effect/sql-pg",
+                    "@effect/sql-squlite-node",
+                    "@effect/sql-squlite-bun",
+                    "@effect/sql-squlite-wasm",
+                    "@effect/sql-squlite-react-native",
+                    "@effect/rpc",
+                    "@effect/rpc-http",
+                    "@effect/typeclass",
+                    "@effect/experimental",
+                    "@effect/opentelemetry",
+                    "@material-ui/core",
+                    "@material-ui/icons",
+                    "@tabler/icons-react",
+                    "mui-core",
+                    "react-icons/ai",
+                    "react-icons/bi",
+                    "react-icons/bs",
+                    "react-icons/cg",
+                    "react-icons/ci",
+                    "react-icons/di",
+                    "react-icons/fa",
+                    "react-icons/fa6",
+                    "react-icons/fc",
+                    "react-icons/fi",
+                    "react-icons/gi",
+                    "react-icons/go",
+                    "react-icons/gr",
+                    "react-icons/hi",
+                    "react-icons/hi2",
+                    "react-icons/im",
+                    "react-icons/io",
+                    "react-icons/io5",
+                    "react-icons/lia",
+                    "react-icons/lib",
+                    "react-icons/lu",
+                    "react-icons/md",
+                    "react-icons/pi",
+                    "react-icons/ri",
+                    "react-icons/rx",
+                    "react-icons/si",
+                    "react-icons/sl",
+                    "react-icons/tb",
+                    "react-icons/tfi",
+                    "react-icons/ti",
+                    "react-icons/vsc",
+                    "react-icons/wi"
+                  ]
+                },
+                "bundlePagesRouterDependencies": false,
+                "configFile": "/Users/bytedance/github/rsnext/examples/next-css/next.config.js",
+                "configFileName": "next.config.js"
+              },
+              "jsConfig": {
+                "compilerOptions": {
+                  "target": 1,
+                  "lib": [
+                    "lib.dom.d.ts",
+                    "lib.dom.iterable.d.ts",
+                    "lib.esnext.d.ts"
+                  ],
+                  "allowJs": true,
+                  "skipLibCheck": true,
+                  "strict": true,
+                  "forceConsistentCasingInFileNames": true,
+                  "noEmit": true,
+                  "esModuleInterop": true,
+                  "module": 99,
+                  "moduleResolution": 2,
+                  "resolveJsonModule": true,
+                  "isolatedModules": true,
+                  "jsx": 1,
+                  "incremental": true
+                }
+              },
+              "transpilePackages": [
+                "geist",
+                "lucide-react",
+                "date-fns",
+                "lodash-es",
+                "ramda",
+                "antd",
+                "react-bootstrap",
+                "ahooks",
+                "@ant-design/icons",
+                "@headlessui/react",
+                "@headlessui-float/react",
+                "@heroicons/react/20/solid",
+                "@heroicons/react/24/solid",
+                "@heroicons/react/24/outline",
+                "@visx/visx",
+                "@tremor/react",
+                "rxjs",
+                "@mui/material",
+                "@mui/icons-material",
+                "recharts",
+                "react-use",
+                "effect",
+                "@effect/schema",
+                "@effect/platform",
+                "@effect/platform-node",
+                "@effect/platform-browser",
+                "@effect/platform-bun",
+                "@effect/sql",
+                "@effect/sql-mssql",
+                "@effect/sql-mysql2",
+                "@effect/sql-pg",
+                "@effect/sql-squlite-node",
+                "@effect/sql-squlite-bun",
+                "@effect/sql-squlite-wasm",
+                "@effect/sql-squlite-react-native",
+                "@effect/rpc",
+                "@effect/rpc-http",
+                "@effect/typeclass",
+                "@effect/experimental",
+                "@effect/opentelemetry",
+                "@material-ui/core",
+                "@material-ui/icons",
+                "@tabler/icons-react",
+                "mui-core",
+                "react-icons/ai",
+                "react-icons/bi",
+                "react-icons/bs",
+                "react-icons/cg",
+                "react-icons/ci",
+                "react-icons/di",
+                "react-icons/fa",
+                "react-icons/fa6",
+                "react-icons/fc",
+                "react-icons/fi",
+                "react-icons/gi",
+                "react-icons/go",
+                "react-icons/gr",
+                "react-icons/hi",
+                "react-icons/hi2",
+                "react-icons/im",
+                "react-icons/io",
+                "react-icons/io5",
+                "react-icons/lia",
+                "react-icons/lib",
+                "react-icons/lu",
+                "react-icons/md",
+                "react-icons/pi",
+                "react-icons/ri",
+                "react-icons/rx",
+                "react-icons/si",
+                "react-icons/sl",
+                "react-icons/tb",
+                "react-icons/tfi",
+                "react-icons/ti",
+                "react-icons/vsc",
+                "react-icons/wi"
+              ],
+              "supportedBrowsers": [
+                "chrome 64",
+                "edge 79",
+                "firefox 67",
+                "opera 51",
+                "safari 12"
+              ],
+              "swcCacheDir": "/Users/bytedance/github/rsnext/examples/next-css/.next/cache/swc",
+              "serverComponents": true,
+              "bundleLayer": "rsc",
+              "esm": true
+            }
+          }
+        ],
+        "resolve": {
+          "mainFields": [
+            "browser",
+            "module",
+            "main"
+          ],
+          "conditionNames": [
+            "react-server",
+            "..."
+          ],
+          "alias": {
+            "react-server-dom-webpack/client$": "next/dist/compiled/react-server-dom-webpack/client",
+            "react-server-dom-webpack/client.edge$": "next/dist/compiled/react-server-dom-webpack/client.edge",
+            "react-server-dom-webpack/server.edge$": "next/dist/compiled/react-server-dom-webpack/server.edge",
+            "react-server-dom-webpack/server.node$": "next/dist/compiled/react-server-dom-webpack/server.node"
+          }
+        }
+      },
+      {
+        "test": {
+          "or": [
+            {},
+            {}
+          ]
+        },
+        "include": [
+          "/Users/bytedance/github/rsnext/examples/next-css",
+          {},
+          {},
+          {},
+          {}
+        ],
+        "use": [
+          {
+            "loader": "next-swc-loader",
+            "options": {
+              "isServer": false,
+              "rootDir": "/Users/bytedance/github/rsnext/examples/next-css",
+              "pagesDir": "/Users/bytedance/github/rsnext/examples/next-css/pages",
+              "hasReactRefresh": false,
+              "nextConfig": {
+                "env": {},
+                "eslint": {
+                  "ignoreDuringBuilds": false
+                },
+                "typescript": {
+                  "ignoreBuildErrors": false,
+                  "tsconfigPath": "tsconfig.json"
+                },
+                "distDir": ".next",
+                "cleanDistDir": true,
+                "assetPrefix": "",
+                "cacheMaxMemorySize": 52428800,
+                "configOrigin": "next.config.js",
+                "useFileSystemPublicRoutes": true,
+                "generateEtags": true,
+                "pageExtensions": [
+                  "tsx",
+                  "ts",
+                  "jsx",
+                  "js"
+                ],
+                "poweredByHeader": true,
+                "compress": true,
+                "images": {
+                  "deviceSizes": [
+                    640,
+                    750,
+                    828,
+                    1080,
+                    1200,
+                    1920,
+                    2048,
+                    3840
+                  ],
+                  "imageSizes": [
+                    16,
+                    32,
+                    48,
+                    64,
+                    96,
+                    128,
+                    256,
+                    384
+                  ],
+                  "path": "/_next/image",
+                  "loader": "default",
+                  "loaderFile": "",
+                  "domains": [],
+                  "disableStaticImages": false,
+                  "minimumCacheTTL": 60,
+                  "formats": [
+                    "image/webp"
+                  ],
+                  "dangerouslyAllowSVG": false,
+                  "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+                  "contentDispositionType": "attachment",
+                  "remotePatterns": [],
+                  "unoptimized": false
+                },
+                "devIndicators": {
+                  "buildActivity": true,
+                  "buildActivityPosition": "bottom-right"
+                },
+                "onDemandEntries": {
+                  "maxInactiveAge": 60000,
+                  "pagesBufferLength": 5
+                },
+                "amp": {
+                  "canonicalBase": ""
+                },
+                "basePath": "",
+                "sassOptions": {},
+                "trailingSlash": false,
+                "i18n": null,
+                "productionBrowserSourceMaps": false,
+                "optimizeFonts": true,
+                "excludeDefaultMomentLocales": true,
+                "serverRuntimeConfig": {},
+                "publicRuntimeConfig": {},
+                "reactProductionProfiling": false,
+                "reactStrictMode": null,
+                "httpAgentOptions": {
+                  "keepAlive": true
+                },
+                "staticPageGenerationTimeout": 60,
+                "modularizeImports": {
+                  "@mui/icons-material": {
+                    "transform": "@mui/icons-material/{{member}}"
+                  },
+                  "lodash": {
+                    "transform": "lodash/{{member}}"
+                  }
+                },
+                "experimental": {
+                  "flyingShuttle": false,
+                  "prerenderEarlyExit": true,
+                  "serverMinification": true,
+                  "serverSourceMaps": false,
+                  "linkNoTouchStart": false,
+                  "caseSensitiveRoutes": false,
+                  "preloadEntriesOnStart": true,
+                  "clientRouterFilter": true,
+                  "clientRouterFilterRedirects": false,
+                  "fetchCacheKeyPrefix": "",
+                  "middlewarePrefetch": "flexible",
+                  "optimisticClientCache": true,
+                  "manualClientBasePath": false,
+                  "cpus": 13,
+                  "memoryBasedWorkersCount": false,
+                  "isrFlushToDisk": true,
+                  "workerThreads": false,
+                  "optimizeCss": false,
+                  "nextScriptWorkers": false,
+                  "scrollRestoration": false,
+                  "externalDir": false,
+                  "disableOptimizedLoading": false,
+                  "gzipSize": true,
+                  "craCompat": false,
+                  "esmExternals": true,
+                  "fullySpecified": false,
+                  "outputFileTracingRoot": "/Users/bytedance/github/rsnext",
+                  "swcTraceProfiling": false,
+                  "forceSwcTransforms": false,
+                  "largePageDataBytes": 128000,
+                  "adjustFontFallbacks": false,
+                  "adjustFontFallbacksWithSizeAdjust": false,
+                  "typedRoutes": false,
+                  "instrumentationHook": false,
+                  "parallelServerCompiles": false,
+                  "parallelServerBuildTraces": false,
+                  "ppr": false,
+                  "webpackMemoryOptimizations": false,
+                  "optimizeServerReact": true,
+                  "useEarlyImport": false,
+                  "staleTimes": {
+                    "dynamic": 0,
+                    "static": 300
+                  },
+                  "after": false,
+                  "optimizePackageImports": [
+                    "lucide-react",
+                    "date-fns",
+                    "lodash-es",
+                    "ramda",
+                    "antd",
+                    "react-bootstrap",
+                    "ahooks",
+                    "@ant-design/icons",
+                    "@headlessui/react",
+                    "@headlessui-float/react",
+                    "@heroicons/react/20/solid",
+                    "@heroicons/react/24/solid",
+                    "@heroicons/react/24/outline",
+                    "@visx/visx",
+                    "@tremor/react",
+                    "rxjs",
+                    "@mui/material",
+                    "@mui/icons-material",
+                    "recharts",
+                    "react-use",
+                    "effect",
+                    "@effect/schema",
+                    "@effect/platform",
+                    "@effect/platform-node",
+                    "@effect/platform-browser",
+                    "@effect/platform-bun",
+                    "@effect/sql",
+                    "@effect/sql-mssql",
+                    "@effect/sql-mysql2",
+                    "@effect/sql-pg",
+                    "@effect/sql-squlite-node",
+                    "@effect/sql-squlite-bun",
+                    "@effect/sql-squlite-wasm",
+                    "@effect/sql-squlite-react-native",
+                    "@effect/rpc",
+                    "@effect/rpc-http",
+                    "@effect/typeclass",
+                    "@effect/experimental",
+                    "@effect/opentelemetry",
+                    "@material-ui/core",
+                    "@material-ui/icons",
+                    "@tabler/icons-react",
+                    "mui-core",
+                    "react-icons/ai",
+                    "react-icons/bi",
+                    "react-icons/bs",
+                    "react-icons/cg",
+                    "react-icons/ci",
+                    "react-icons/di",
+                    "react-icons/fa",
+                    "react-icons/fa6",
+                    "react-icons/fc",
+                    "react-icons/fi",
+                    "react-icons/gi",
+                    "react-icons/go",
+                    "react-icons/gr",
+                    "react-icons/hi",
+                    "react-icons/hi2",
+                    "react-icons/im",
+                    "react-icons/io",
+                    "react-icons/io5",
+                    "react-icons/lia",
+                    "react-icons/lib",
+                    "react-icons/lu",
+                    "react-icons/md",
+                    "react-icons/pi",
+                    "react-icons/ri",
+                    "react-icons/rx",
+                    "react-icons/si",
+                    "react-icons/sl",
+                    "react-icons/tb",
+                    "react-icons/tfi",
+                    "react-icons/ti",
+                    "react-icons/vsc",
+                    "react-icons/wi"
+                  ]
+                },
+                "bundlePagesRouterDependencies": false,
+                "configFile": "/Users/bytedance/github/rsnext/examples/next-css/next.config.js",
+                "configFileName": "next.config.js"
+              },
+              "jsConfig": {
+                "compilerOptions": {
+                  "target": 1,
+                  "lib": [
+                    "lib.dom.d.ts",
+                    "lib.dom.iterable.d.ts",
+                    "lib.esnext.d.ts"
+                  ],
+                  "allowJs": true,
+                  "skipLibCheck": true,
+                  "strict": true,
+                  "forceConsistentCasingInFileNames": true,
+                  "noEmit": true,
+                  "esModuleInterop": true,
+                  "module": 99,
+                  "moduleResolution": 2,
+                  "resolveJsonModule": true,
+                  "isolatedModules": true,
+                  "jsx": 1,
+                  "incremental": true
+                }
+              },
+              "transpilePackages": [
+                "geist",
+                "lucide-react",
+                "date-fns",
+                "lodash-es",
+                "ramda",
+                "antd",
+                "react-bootstrap",
+                "ahooks",
+                "@ant-design/icons",
+                "@headlessui/react",
+                "@headlessui-float/react",
+                "@heroicons/react/20/solid",
+                "@heroicons/react/24/solid",
+                "@heroicons/react/24/outline",
+                "@visx/visx",
+                "@tremor/react",
+                "rxjs",
+                "@mui/material",
+                "@mui/icons-material",
+                "recharts",
+                "react-use",
+                "effect",
+                "@effect/schema",
+                "@effect/platform",
+                "@effect/platform-node",
+                "@effect/platform-browser",
+                "@effect/platform-bun",
+                "@effect/sql",
+                "@effect/sql-mssql",
+                "@effect/sql-mysql2",
+                "@effect/sql-pg",
+                "@effect/sql-squlite-node",
+                "@effect/sql-squlite-bun",
+                "@effect/sql-squlite-wasm",
+                "@effect/sql-squlite-react-native",
+                "@effect/rpc",
+                "@effect/rpc-http",
+                "@effect/typeclass",
+                "@effect/experimental",
+                "@effect/opentelemetry",
+                "@material-ui/core",
+                "@material-ui/icons",
+                "@tabler/icons-react",
+                "mui-core",
+                "react-icons/ai",
+                "react-icons/bi",
+                "react-icons/bs",
+                "react-icons/cg",
+                "react-icons/ci",
+                "react-icons/di",
+                "react-icons/fa",
+                "react-icons/fa6",
+                "react-icons/fc",
+                "react-icons/fi",
+                "react-icons/gi",
+                "react-icons/go",
+                "react-icons/gr",
+                "react-icons/hi",
+                "react-icons/hi2",
+                "react-icons/im",
+                "react-icons/io",
+                "react-icons/io5",
+                "react-icons/lia",
+                "react-icons/lib",
+                "react-icons/lu",
+                "react-icons/md",
+                "react-icons/pi",
+                "react-icons/ri",
+                "react-icons/rx",
+                "react-icons/si",
+                "react-icons/sl",
+                "react-icons/tb",
+                "react-icons/tfi",
+                "react-icons/ti",
+                "react-icons/vsc",
+                "react-icons/wi"
+              ],
+              "supportedBrowsers": [
+                "chrome 64",
+                "edge 79",
+                "firefox 67",
+                "opera 51",
+                "safari 12"
+              ],
+              "swcCacheDir": "/Users/bytedance/github/rsnext/examples/next-css/.next/cache/swc",
+              "serverComponents": true,
+              "esm": false
+            }
+          }
+        ]
+      },
+      {
+        "sideEffects": false,
+        "test": "/Users/bytedance/github/rsnext/packages/next/font/google/target.css",
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 1,
+              "esModule": false,
+              "modules": {
+                "exportLocalsConvention": "asIs",
+                "exportOnlyLocals": false,
+                "mode": "pure"
+              },
+              "fontLoader": true
+            }
+          },
+          {
+            "loader": "next-font-loader",
+            "options": {
+              "isDev": false,
+              "isServer": false,
+              "assetPrefix": "",
+              "fontLoaderPath": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/@next/font/google/loader.js"
+            }
+          }
+        ]
+      },
+      {
+        "sideEffects": false,
+        "test": "/Users/bytedance/github/rsnext/packages/next/font/local/target.css",
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 1,
+              "esModule": false,
+              "modules": {
+                "exportLocalsConvention": "asIs",
+                "exportOnlyLocals": false,
+                "mode": "pure"
+              },
+              "fontLoader": true
+            }
+          },
+          {
+            "loader": "next-font-loader",
+            "options": {
+              "isDev": false,
+              "isServer": false,
+              "assetPrefix": "",
+              "fontLoaderPath": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/@next/font/local/loader.js"
+            }
+          }
+        ]
+      },
+      {
+        "test": {},
+        "issuer": {},
+        "use": {
+          "loader": "error-loader",
+          "options": {
+            "reason": "CSS \u001b[1mcannot\u001b[22m be imported within \u001b[36mpages/_document.js\u001b[39m. Please move global styles to \u001b[36mpages/_app.js\u001b[39m."
+          }
+        }
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "issuerLayer": {
+          "not": [
+            "rsc",
+            "ssr",
+            "app-pages-browser"
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 1,
+              "esModule": false,
+              "modules": {
+                "exportLocalsConvention": "asIs",
+                "exportOnlyLocals": false,
+                "mode": "pure"
+              }
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          }
+        ]
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "issuerLayer": {
+          "not": [
+            "rsc",
+            "ssr",
+            "app-pages-browser"
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 3,
+              "esModule": false,
+              "modules": {
+                "exportLocalsConvention": "asIs",
+                "exportOnlyLocals": false,
+                "mode": "pure"
+              }
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/resolve-url-loader/index.js",
+            "options": {
+              "sourceMap": true
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/sass-loader/cjs.js",
+            "options": {
+              "sourceMap": true,
+              "sassOptions": {
+                "fibers": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "test": [
+          {},
+          {}
+        ],
+        "use": {
+          "loader": "error-loader",
+          "options": {
+            "reason": "CSS Modules \u001b[1mcannot\u001b[22m be imported from within \u001b[1mnode_modules\u001b[22m.\nRead more: https://nextjs.org/docs/messages/css-modules-npm"
+          }
+        }
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "include": {
+          "and": [
+            {
+              "or": [
+                {},
+                {
+                  "not": [
+                    "/Users/bytedance/github/rsnext/examples/next-css"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "issuer": {
+          "and": [
+            "/Users/bytedance/github/rsnext/examples/next-css"
+          ],
+          "not": [
+            {}
+          ]
+        },
+        "issuerLayer": {
+          "not": [
+            "rsc",
+            "ssr",
+            "app-pages-browser"
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 1,
+              "modules": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          }
+        ]
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "include": {
+          "and": [
+            {
+              "or": [
+                {},
+                {
+                  "not": [
+                    "/Users/bytedance/github/rsnext/examples/next-css"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "issuer": {
+          "and": [
+            "/Users/bytedance/github/rsnext/examples/next-css"
+          ],
+          "not": [
+            {}
+          ]
+        },
+        "issuerLayer": {
+          "not": [
+            "rsc",
+            "ssr",
+            "app-pages-browser"
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 3,
+              "modules": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/resolve-url-loader/index.js",
+            "options": {
+              "sourceMap": true
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/sass-loader/cjs.js",
+            "options": {
+              "sourceMap": true,
+              "sassOptions": {
+                "fibers": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "issuer": {
+          "and": [
+            {}
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 1,
+              "modules": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          }
+        ]
+      },
+      {
+        "sideEffects": true,
+        "test": {},
+        "issuer": {
+          "and": [
+            {}
+          ]
+        },
+        "use": [
+          {
+            "loader": "/Users/bytedance/github/rsnext/node_modules/.pnpm/@rspack+core@1.0.0-alpha.5_@swc+helpers@0.5.11/node_modules/@rspack/core/dist/builtin-plugin/css-extract/loader.js",
+            "options": {
+              "publicPath": "/_next/",
+              "esModule": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/css-loader/src/index.js",
+            "options": {
+              "importLoaders": 3,
+              "modules": false
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/postcss-loader/src/index.js",
+            "options": {}
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/build/webpack/loaders/resolve-url-loader/index.js",
+            "options": {
+              "sourceMap": true
+            }
+          },
+          {
+            "loader": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/sass-loader/cjs.js",
+            "options": {
+              "sourceMap": true,
+              "sassOptions": {
+                "fibers": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "test": [
+          {},
+          {}
+        ],
+        "issuer": {
+          "and": [
+            {}
+          ]
+        },
+        "use": {
+          "loader": "error-loader",
+          "options": {
+            "reason": "Global CSS \u001b[1mcannot\u001b[22m be imported from within \u001b[1mnode_modules\u001b[22m.\nRead more: https://nextjs.org/docs/messages/css-npm"
+          }
+        }
+      },
+      {
+        "test": [
+          {},
+          {}
+        ],
+        "use": {
+          "loader": "error-loader",
+          "options": {
+            "reason": "Global CSS \u001b[1mcannot\u001b[22m be imported from files other than your \u001b[1mCustom <App>\u001b[22m. Due to the Global nature of stylesheets, and to avoid conflicts, Please move all first-party global CSS imports to \u001b[36mpages/_app.js\u001b[39m. Or convert the import to Component-Level CSS (CSS Modules).\nRead more: https://nextjs.org/docs/messages/css-global"
+          }
+        }
+      },
+      {
+        "issuer": {},
+        "exclude": [
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "type": "asset/resource"
+      },
+      {
+        "test": {},
+        "use": {
+          "loader": "error-loader",
+          "options": {
+            "reason": "Images \u001b[1mcannot\u001b[22m be imported within \u001b[36mpages/_document.js\u001b[39m. Please move image imports that need to be displayed on every page into \u001b[36mpages/_app.js\u001b[39m.\nRead more: https://nextjs.org/docs/messages/custom-document-image-import"
+          }
+        },
+        "issuer": {}
+      }
+    ]
+  },
+  {
+    "test": {},
+    "loader": "next-image-loader",
+    "issuer": {
+      "not": {}
+    },
+    "dependency": {
+      "not": [
+        "url"
+      ]
+    },
+    "resourceQuery": {
+      "not": [
+        {},
+        {},
+        {}
+      ]
+    },
+    "options": {
+      "isDev": false,
+      "compilerType": "client",
+      "basePath": "",
+      "assetPrefix": ""
+    }
+  },
+  {
+    "resolve": {
+      "fallback": {
+        "assert": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/assert/assert.js",
+        "buffer": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/buffer/index.js",
+        "constants": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/constants-browserify/constants.json",
+        "crypto": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/crypto-browserify/index.js",
+        "domain": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/domain-browser/index.js",
+        "http": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/stream-http/index.js",
+        "https": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/https-browserify/index.js",
+        "os": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/os-browserify/browser.js",
+        "path": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/path-browserify/index.js",
+        "punycode": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/punycode/punycode.js",
+        "process": "/Users/bytedance/github/rsnext/packages/next/dist/build/polyfills/process.js",
+        "querystring": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/querystring-es3/index.js",
+        "stream": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/stream-browserify/index.js",
+        "string_decoder": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/string_decoder/string_decoder.js",
+        "sys": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/util/util.js",
+        "timers": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/timers-browserify/main.js",
+        "tty": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/tty-browserify/index.js",
+        "util": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/util/util.js",
+        "vm": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/vm-browserify/index.js",
+        "zlib": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/browserify-zlib/index.js",
+        "events": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/events/events.js",
+        "setImmediate": "/Users/bytedance/github/rsnext/packages/next/dist/compiled/setimmediate/setImmediate.js"
+      }
+    }
+  },
+  {
+    "test": {},
+    "sideEffects": false
+  },
+  {
+    "test": {}
+  },
+  {
+    "resolve": {
+      "alias": {
+        "next": "/Users/bytedance/github/rsnext/packages/next"
+      }
+    }
+  }
+]

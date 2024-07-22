@@ -924,14 +924,15 @@ export default async function getBaseWebpackConfig(
                 dependencyType,
                 contextInfo?.issuerLayer as WebpackLayerName,
                 (options) => {
-                  return true as any;
-                  const resolveFunction = getResolve(options)
+                  const {ResolverFactory } = require("enhanced-resolve");
+                  const myResolver = ResolverFactory.createResolver(options);
                   return (resolveContext: string, requestToResolve: string) =>
                     new Promise((resolve, reject) => {
-                      resolveFunction(
+                      myResolver.resolve(
                         resolveContext,
                         requestToResolve,
                         (err, result, resolveData) => {
+                          console.log('xxx:', err, result, resolveData)
                           if (err) return reject(err)
                           if (!result) return resolve([null, false])
                           const isEsm = /\.js$/i.test(result)
@@ -1051,12 +1052,12 @@ export default async function getBaseWebpackConfig(
             if (isModuleCSS(module)) {
               module.updateHash(hash)
             } else {
-              if (!module.libIdent) {
-                throw new Error(
-                  `Encountered unknown module type: ${module.type}. Please open an issue.`
-                )
-              }
-              hash.update(module.libIdent({ context: dir }))
+              // if (!module.libIdent) {
+              //   throw new Error(
+              //     `Encountered unknown module type: ${module.type}. Please open an issue.`
+              //   )
+              // }
+              // hash.update(module.libIdent({ context: dir }))
             }
 
             // Ensures the name of the chunk is not the same between two modules in different layers
@@ -1740,7 +1741,7 @@ export default async function getBaseWebpackConfig(
               resource.request,
               '.shared-runtime'
             )
-            const layer = 'pages' as string
+            const layer = resource.contextInfo.issuerLayer;
             let runtime
 
             switch (layer) {
@@ -2345,7 +2346,7 @@ export default async function getBaseWebpackConfig(
     const fileLoader = {
       exclude: fileLoaderExclude,
       issuer: fileLoaderExclude,
-      type: 'asset/resource',
+      type: 'asset/inline',
     }
 
     const topRules = []

@@ -11,6 +11,7 @@ function nextClientPagesLoader(this: any) {
     'next-client-pages-loader'
   )
 
+  
   return pagesLoaderSpan.traceFn(() => {
     const { absolutePagePath, page } =
       this.getOptions() as ClientPagesLoaderOptions
@@ -19,7 +20,7 @@ function nextClientPagesLoader(this: any) {
 
     const stringifiedPageRequest = stringifyRequest(this, absolutePagePath)
     const stringifiedPage = JSON.stringify(page)
-    console.log('page:', stringifiedPage, stringifiedPageRequest);
+    console.log('page:',this._module);
     return `
     (window.__NEXT_P = window.__NEXT_P || []).push([
       ${stringifiedPage},
