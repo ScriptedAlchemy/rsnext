@@ -11,6 +11,7 @@ export class DropClientPage implements webpack.WebpackPluginInstance {
   ampPages = new Set()
 
   apply(compiler: webpack.Compiler) {
+    return
     compiler.hooks.compilation.tap(
       PLUGIN_NAME,
       (compilation: any, { normalModuleFactory }: any) => {

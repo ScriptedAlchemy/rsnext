@@ -69,6 +69,7 @@ export class FontStylesheetGatheringPlugin {
   private parserHandler = (
     factory: ReturnType<webpack.Compiler['createNormalModuleFactory']>
   ): void => {
+    return
     const JS_TYPES = ['auto', 'esm', 'dynamic']
     // Do an extra walk per module and add interested visitors to the walk.
     for (const type of JS_TYPES) {

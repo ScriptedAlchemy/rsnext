@@ -573,7 +573,8 @@ export const css = curry(async function css(
             issuer: regexLikeCss,
             // Exclude extensions that webpack handles by default
             exclude: [
-              /\.(js|mjs|jsx|ts|tsx)$/,
+              /^$/,
+              /\.(js|mjs|jsx|ts|tsx)/,
               /\.html$/,
               /\.json$/,
               /\.webpack\[[^\]]+\]$/,
@@ -590,8 +591,7 @@ export const css = curry(async function css(
   // Enable full mini-css-extract-plugin hmr for prod mode pages or app dir
   if (ctx.isClient && (ctx.isProduction || ctx.hasAppDir)) {
     // Extract CSS as CSS file(s) in the client-side production bundle.
-    const MiniCssExtractPlugin =
-      require('../../../plugins/mini-css-extract-plugin').default
+    const MiniCssExtractPlugin = require('@rspack/core').CssExtractRspackPlugin
     fns.push(
       plugin(
         // @ts-ignore webpack 5 compat

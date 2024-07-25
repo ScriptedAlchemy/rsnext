@@ -190,6 +190,7 @@ export class TelemetryPlugin implements webpack.WebpackPluginInstance {
   }
 
   apply(compiler: webpack.Compiler): void {
+    return
     compiler.hooks.make.tapAsync(
       TelemetryPlugin.name,
       async (compilation: webpack.Compilation, callback: () => void) => {

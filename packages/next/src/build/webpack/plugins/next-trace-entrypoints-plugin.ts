@@ -677,6 +677,7 @@ export class TraceEntryPointsPlugin implements webpack.WebpackPluginInstance {
   }
 
   apply(compiler: webpack.Compiler) {
+    return
     compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
       const readlink = async (path: string): Promise<string | null> => {
         try {
