@@ -58,7 +58,7 @@ export async function loadEntrypoint(
           path.resolve(TEMPLATE_FOLDER, fromRequest ?? importRequest)
         )
         // Ensure that we use linux style path separators for node.
-        .replace(/\\/g, '/')
+        .replace(/\\/g, '/').replace('rsnext','next');
 
       // Verify that the relative import is relative to the `next` package. This
       // will catch cases where the constants at the top of the file were not

@@ -729,7 +729,10 @@ export default async function getBaseWebpackConfig(
     plugins: [
       isNodeServer ? new OptionalPeerDependencyResolverPlugin() : undefined,
     ].filter(Boolean) as webpack.ResolvePluginInstance[],
-  }
+    tsConfig: {
+      configFile: path.resolve(dir, 'tsconfig.json')
+    }
+  } as any;
 
   const terserOptions: any = {
     parse: {

@@ -23,5 +23,8 @@ exports.init = function () {
   } else {
     console.log('load rspack');
     Object.assign(exports, require('@rspack/core'))
+    Object.assign(exports,{
+        StringXor: require('./StringXor'),
+    })
   }
 }
