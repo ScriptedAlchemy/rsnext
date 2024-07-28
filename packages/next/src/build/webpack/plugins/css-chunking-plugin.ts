@@ -29,6 +29,7 @@ export class CssChunkingPlugin {
   }
 
   public apply(compiler: Compiler) {
+    return
     const strict = this.strict
     const summary = !!process.env.CSS_CHUNKING_SUMMARY
     compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {

@@ -21,6 +21,10 @@ exports.init = function () {
       webpack: require('webpack'),
     })
   } else {
-    Object.assign(exports, require('./bundle5')())
+    console.log('load rspack');
+    Object.assign(exports, require('@rspack/core'))
+    Object.assign(exports,{
+        StringXor: require('./StringXor'),
+    })
   }
 }

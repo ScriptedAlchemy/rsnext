@@ -20,7 +20,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWAR
 */
 // Implementation of this PR: https://github.com/jamiebuilds/react-loadable/pull/132
 // Modified to strip out unneeded results for Next's specific use case
-
+/* eslint-disable */
 import { webpack, sources } from 'next/dist/compiled/webpack/webpack'
 
 import path from 'path'
@@ -134,9 +134,9 @@ function buildManifest(
       }
     }
   }
-  for (const module of compilation.modules) {
-    module.blocks.forEach(handleBlock)
-  }
+  // for (const module of compilation.modules) {
+  //   module.blocks.forEach(handleBlock)
+  // }
 
   manifest = Object.keys(manifest)
     .sort()

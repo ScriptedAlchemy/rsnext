@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { NormalModule } from 'next/dist/compiled/webpack/webpack'
 import type { Span } from '../../../trace'
 import type { webpack } from 'next/dist/compiled/webpack/webpack'
@@ -63,7 +64,7 @@ export class ProfilingPlugin {
     } = {}
   ) {
     let span: Span | undefined
-    startHook.tap(
+    startHook?.tap(
       { name: pluginName, stage: -Infinity },
       (...params: any[]) => {
         const name = typeof spanName === 'function' ? spanName() : spanName
@@ -75,7 +76,7 @@ export class ProfilingPlugin {
         if (onStart) onStart(span, ...params)
       }
     )
-    stopHook.tap({ name: pluginName, stage: Infinity }, (...params: any[]) => {
+    stopHook?.tap({ name: pluginName, stage: Infinity }, (...params: any[]) => {
       // `stopHook` may be triggered when `startHook` has not in cases
       // where `stopHook` is used as the terminating event for more
       // than one pair of hooks.
@@ -149,54 +150,54 @@ export class ProfilingPlugin {
     compiler.hooks.compilation.tap(
       { name: pluginName, stage: -Infinity },
       (compilation: any) => {
-        compilation.hooks.buildModule.tap(pluginName, (module: any) => {
-          const moduleType = (() => {
-            const r = module.userRequest
-            if (!r || r.endsWith('!')) {
-              return ''
-            } else {
-              const resource = r.split('!').pop()
-              const match = /^[^?]+\.([^?]+)$/.exec(resource)
-              return match ? match[1] : ''
-            }
-          })()
+        // compilation.hooks.buildModule.tap(pluginName, (module: any) => {
+        //   const moduleType = (() => {
+        //     const r = module.userRequest
+        //     if (!r || r.endsWith('!')) {
+        //       return ''
+        //     } else {
+        //       const resource = r.split('!').pop()
+        //       const match = /^[^?]+\.([^?]+)$/.exec(resource)
+        //       return match ? match[1] : ''
+        //     }
+        //   })()
 
-          const issuerModule = compilation?.moduleGraph?.getIssuer(module)
+        //   const issuerModule = compilation?.moduleGraph?.getIssuer(module)
 
-          let span: Span
+        //   let span: Span
 
-          const moduleSpans = moduleSpansByCompilation.get(compilation)
-          const spanName = `build-module${moduleType ? `-${moduleType}` : ''}`
-          const issuerSpan: Span | undefined =
-            issuerModule && moduleSpans?.get(issuerModule)
-          if (issuerSpan) {
-            span = issuerSpan.traceChild(spanName)
-          } else {
-            let parentSpan: Span | undefined
-            for (const incomingConnection of compilation.moduleGraph.getIncomingConnections(
-              module
-            )) {
-              const entrySpan = spans.get(incomingConnection.dependency)
-              if (entrySpan) {
-                parentSpan = entrySpan
-                break
-              }
-            }
+        //   const moduleSpans = moduleSpansByCompilation.get(compilation)
+        //   const spanName = `build-module${moduleType ? `-${moduleType}` : ''}`
+        //   const issuerSpan: Span | undefined =
+        //     issuerModule && moduleSpans?.get(issuerModule)
+        //   if (issuerSpan) {
+        //     span = issuerSpan.traceChild(spanName)
+        //   } else {
+        //     let parentSpan: Span | undefined
+        //     for (const incomingConnection of compilation.moduleGraph?.getIncomingConnections(
+        //       module
+        //     )) {
+        //       const entrySpan = spans.get(incomingConnection.dependency)
+        //       if (entrySpan) {
+        //         parentSpan = entrySpan
+        //         break
+        //       }
+        //     }
 
-            if (!parentSpan) {
-              const compilationSpan = spans.get(compilation)
-              if (!compilationSpan) {
-                return
-              }
+        //     if (!parentSpan) {
+        //       const compilationSpan = spans.get(compilation)
+        //       if (!compilationSpan) {
+        //         return
+        //       }
 
-              parentSpan = compilationSpan
-            }
-            span = parentSpan.traceChild(spanName)
-          }
-          span.setAttribute('name', module.userRequest)
-          span.setAttribute('layer', module.layer)
-          moduleSpans!.set(module, span)
-        })
+        //       parentSpan = compilationSpan
+        //     }
+        //     span = parentSpan.traceChild(spanName)
+        //   }
+        //   span.setAttribute('name', module.userRequest)
+        //   span.setAttribute('layer', module.layer)
+        //   moduleSpans!.set(module, span)
+        // })
 
         const moduleHooks = NormalModule.getCompilationHooks(compilation)
         moduleHooks.readResource.for(undefined).intercept({
@@ -214,17 +215,41 @@ export class ProfilingPlugin {
         moduleHooks.loader.tap(
           pluginName,
           (loaderContext: any, module: any) => {
-            const moduleSpan = moduleSpansByCompilation
-              .get(compilation)
-              ?.get(module)
+            // const moduleSpan = moduleSpansByCompilation
+            //   .get(compilation)
+            //   ?.get(module)
+            const moduleSpan = {
+              traceChild() {
+                return {
+                  traceFn(fn: any) {
+                    return fn()
+                  },
+                  traceAsyncFn(fn: any) {
+                    return fn()
+                  },
+                  setAttribute() {},
+                  traceChild() {
+                    return {
+                      traceFn(fn: any) {
+                        return fn()
+                      },
+                      traceAsyncFn(fn: any) {
+                        return fn()
+                      },
+                      setAttribute() {},
+                    }
+                  },
+                }
+              },
+            }
             loaderContext.currentTraceSpan = moduleSpan
           }
         )
 
-        compilation.hooks.succeedModule.tap(pluginName, (module: any) => {
+        compilation.hooks.succeedModule?.tap(pluginName, (module: any) => {
           moduleSpansByCompilation?.get(compilation)?.get(module)?.stop()
         })
-        compilation.hooks.failedModule.tap(pluginName, (module: any) => {
+        compilation.hooks.failedModule?.tap(pluginName, (module: any) => {
           moduleSpansByCompilation?.get(compilation)?.get(module)?.stop()
         })
 
@@ -243,7 +268,7 @@ export class ProfilingPlugin {
           }
         )
 
-        compilation.hooks.addEntry.tap(pluginName, (entry: any) => {
+        compilation.hooks.addEntry?.tap(pluginName, (entry: any) => {
           const parentSpan =
             makeSpanByCompilation.get(compilation) || spans.get(compilation)
           if (!parentSpan) {
@@ -254,11 +279,11 @@ export class ProfilingPlugin {
           spans.set(entry, addEntrySpan)
         })
 
-        compilation.hooks.succeedEntry.tap(pluginName, (entry: any) => {
+        compilation.hooks.succeedEntry?.tap(pluginName, (entry: any) => {
           spans.get(entry)?.stop()
           spans.delete(entry)
         })
-        compilation.hooks.failedEntry.tap(pluginName, (entry: any) => {
+        compilation.hooks.failedEntry?.tap(pluginName, (entry: any) => {
           spans.get(entry)?.stop()
           spans.delete(entry)
         })
@@ -355,31 +380,31 @@ export class ProfilingPlugin {
         )
 
         const logs = new Map()
-        const originalTime = compilation.logger.time
-        const originalTimeEnd = compilation.logger.timeEnd
+        const originalTime = compilation.logger?.time
+        const originalTimeEnd = compilation.logger?.timeEnd
 
-        compilation.logger.time = (label: string) => {
-          if (!inTraceLabelsSeal(label)) {
-            return originalTime.call(compilation.logger, label)
-          }
-          const span = sealSpanByCompilation.get(compilation)
-          if (span) {
-            logs.set(label, span.traceChild(label.replace(/ /g, '-')))
-          }
-          return originalTime.call(compilation.logger, label)
-        }
-        compilation.logger.timeEnd = (label: string) => {
-          if (!inTraceLabelsSeal(label)) {
-            return originalTimeEnd.call(compilation.logger, label)
-          }
+        // compilation.logger.time = (label: string) => {
+        //   if (!inTraceLabelsSeal(label)) {
+        //     return originalTime.call(compilation.logger, label)
+        //   }
+        //   const span = sealSpanByCompilation.get(compilation)
+        //   if (span) {
+        //     logs.set(label, span.traceChild(label.replace(/ /g, '-')))
+        //   }
+        //   return originalTime.call(compilation.logger, label)
+        // }
+        // compilation.logger.timeEnd = (label: string) => {
+        //   if (!inTraceLabelsSeal(label)) {
+        //     return originalTimeEnd.call(compilation.logger, label)
+        //   }
 
-          const span = logs.get(label)
-          if (span) {
-            span.stop()
-            logs.delete(label)
-          }
-          return originalTimeEnd.call(compilation.logger, label)
-        }
+        //   const span = logs.get(label)
+        //   if (span) {
+        //     span.stop()
+        //     logs.delete(label)
+        //   }
+        //   return originalTimeEnd.call(compilation.logger, label)
+        // }
       }
     )
   }

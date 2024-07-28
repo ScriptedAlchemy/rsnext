@@ -1,5 +1,7 @@
+/* eslint-disable */
 import React from 'react'
-import ReactRefreshWebpackPlugin from 'next/dist/compiled/@next/react-refresh-utils/dist/ReactRefreshWebpackPlugin'
+import ReactReFreshPlugin from '@rspack/plugin-react-refresh'
+//import ReactRefreshWebpackPlugin from 'next/dist/compiled/@next/react-refresh-utils/dist/ReactRefreshWebpackPlugin'
 import { yellow, bold } from '../lib/picocolors'
 import crypto from 'crypto'
 import { webpack } from 'next/dist/compiled/webpack/webpack'
@@ -728,7 +730,10 @@ export default async function getBaseWebpackConfig(
     plugins: [
       isNodeServer ? new OptionalPeerDependencyResolverPlugin() : undefined,
     ].filter(Boolean) as webpack.ResolvePluginInstance[],
-  }
+    tsConfig: {
+      configFile: path.resolve(dir, 'tsconfig.json'),
+    },
+  } as any
 
   const terserOptions: any = {
     parse: {
@@ -922,15 +927,16 @@ export default async function getBaseWebpackConfig(
                 context,
                 request,
                 dependencyType,
-                contextInfo.issuerLayer as WebpackLayerName,
+                contextInfo?.issuerLayer as WebpackLayerName,
                 (options) => {
-                  const resolveFunction = getResolve(options)
+                  const { ResolverFactory } = require('enhanced-resolve')
+                  const myResolver = ResolverFactory.createResolver(options)
                   return (resolveContext: string, requestToResolve: string) =>
                     new Promise((resolve, reject) => {
-                      resolveFunction(
+                      myResolver.resolve(
                         resolveContext,
                         requestToResolve,
-                        (err, result, resolveData) => {
+                        (err: any, result: any, resolveData: any) => {
                           if (err) return reject(err)
                           if (!result) return resolve([null, false])
                           const isEsm = /\.js$/i.test(result)
@@ -1037,7 +1043,6 @@ export default async function getBaseWebpackConfig(
           }): boolean {
             return (
               !module.type?.startsWith('css') &&
-              module.size() > 160000 &&
               /node_modules[/\\]/.test(module.nameForCondition() || '')
             )
           },
@@ -1051,12 +1056,12 @@ export default async function getBaseWebpackConfig(
             if (isModuleCSS(module)) {
               module.updateHash(hash)
             } else {
-              if (!module.libIdent) {
-                throw new Error(
-                  `Encountered unknown module type: ${module.type}. Please open an issue.`
-                )
-              }
-              hash.update(module.libIdent({ context: dir }))
+              // if (!module.libIdent) {
+              //   throw new Error(
+              //     `Encountered unknown module type: ${module.type}. Please open an issue.`
+              //   )
+              // }
+              // hash.update(module.libIdent({ context: dir }))
             }
 
             // Ensures the name of the chunk is not the same between two modules in different layers
@@ -1104,35 +1109,35 @@ export default async function getBaseWebpackConfig(
           const {
             TerserPlugin,
           } = require('./webpack/plugins/terser-webpack-plugin/src/index.js')
-          new TerserPlugin({
-            terserOptions: {
-              ...terserOptions,
-              compress: {
-                ...terserOptions.compress,
-              },
-              mangle: {
-                ...terserOptions.mangle,
-              },
-            },
-          }).apply(compiler)
+          // new TerserPlugin({
+          //   terserOptions: {
+          //     ...terserOptions,
+          //     compress: {
+          //       ...terserOptions.compress,
+          //     },
+          //     mangle: {
+          //       ...terserOptions.mangle,
+          //     },
+          //   },
+          // }).apply(compiler)
         },
         // Minify CSS
         (compiler: webpack.Compiler) => {
           const {
             CssMinimizerPlugin,
           } = require('./webpack/plugins/css-minimizer-plugin')
-          new CssMinimizerPlugin({
-            postcssOptions: {
-              map: {
-                // `inline: false` generates the source map in a separate file.
-                // Otherwise, the CSS file is needlessly large.
-                inline: false,
-                // `annotation: false` skips appending the `sourceMappingURL`
-                // to the end of the CSS file. Webpack already handles this.
-                annotation: false,
-              },
-            },
-          }).apply(compiler)
+          // new CssMinimizerPlugin({
+          //   postcssOptions: {
+          //     map: {
+          //       // `inline: false` generates the source map in a separate file.
+          //       // Otherwise, the CSS file is needlessly large.
+          //       inline: false,
+          //       // `annotation: false` skips appending the `sourceMappingURL`
+          //       // to the end of the CSS file. Webpack already handles this.
+          //       annotation: false,
+          //     },
+          //   },
+          // }).apply(compiler)
         },
       ],
     },
@@ -1757,7 +1762,7 @@ export default async function getBaseWebpackConfig(
           }
         ),
       dev && new MemoryWithGcCachePlugin({ maxGenerations: 5 }),
-      dev && isClient && new ReactRefreshWebpackPlugin(webpack),
+      dev && isClient && new ReactReFreshPlugin(),
       // Makes sure `Buffer` and `process` are polyfilled in client and flight bundles (same behavior as webpack 4)
       (isClient || isEdgeServer) &&
         new webpack.ProvidePlugin({

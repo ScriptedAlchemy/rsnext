@@ -40,11 +40,8 @@ export function getClientStyleLoader({
       },
     }
   }
-
-  const MiniCssExtractPlugin =
-    require('../../../../plugins/mini-css-extract-plugin').default
   return {
-    loader: MiniCssExtractPlugin.loader,
+    loader: require('@rspack/core').rspack.CssExtractRspackPlugin.loader,
     options: {
       publicPath: `${assetPrefix}/_next/`,
       esModule: false,

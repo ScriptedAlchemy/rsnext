@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type {
   AssetBinding,
   EdgeMiddlewareMeta,
@@ -568,7 +569,7 @@ function getExtractMetadata(params: {
     metadataByEntry.clear()
     const telemetry: Telemetry | undefined = traceGlobals.get('telemetry')
 
-    for (const [entryName, entry] of compilation.entries) {
+    for (const [entryName, entry] of compilation.entries ?? []) {
       if (entry.options.runtime !== EDGE_RUNTIME_WEBPACK) {
         // Only process edge runtime entries
         continue
@@ -782,9 +783,9 @@ export default class MiddlewarePlugin {
         compiler,
         compilation,
       })
-      hooks.parser.for('javascript/auto').tap(NAME, codeAnalyzer)
-      hooks.parser.for('javascript/dynamic').tap(NAME, codeAnalyzer)
-      hooks.parser.for('javascript/esm').tap(NAME, codeAnalyzer)
+      // hooks.parser.for('javascript/auto').tap(NAME, codeAnalyzer)
+      // hooks.parser.for('javascript/dynamic').tap(NAME, codeAnalyzer)
+      // hooks.parser.for('javascript/esm').tap(NAME, codeAnalyzer)
 
       /**
        * Extract all metadata for the entry points in a Map object.

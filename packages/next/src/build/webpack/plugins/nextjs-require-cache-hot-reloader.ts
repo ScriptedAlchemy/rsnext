@@ -95,7 +95,8 @@ export class NextJsRequireCacheHotReloader implements WebpackPluginInstance {
       // since they can have a stale webpack-runtime cache
       // which needs to always be in-sync
       let hasAppEntry = false
-      const entries = [...compilation.entries.keys()].filter((entry) => {
+
+      const entries = [...compilation.entrypoints.keys()].filter((entry) => {
         const isAppPath = entry.toString().startsWith('app/')
         if (isAppPath) hasAppEntry = true
         return entry.toString().startsWith('pages/') || isAppPath
