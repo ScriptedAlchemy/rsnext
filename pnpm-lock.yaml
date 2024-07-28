@@ -869,6 +869,9 @@ importers:
       '@rspack/core':
         specifier: 1.0.0-alpha.5
         version: 1.0.0-alpha.5(@swc/helpers@0.5.11)
+      '@rspack/plugin-react-refresh':
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(react-refresh@0.12.0)
       '@swc/helpers':
         specifier: 0.5.11
         version: 0.5.11
@@ -4542,6 +4545,14 @@ packages:
     resolution: {integrity: sha512-B1fNL3en1ohK+QybgjM45PpqcmAmr2LTRUhGvarwouNcj845vjq5clYPqUfFVC0goLmsqx+pt7r+TvpP0Yk67A==}
     engines: {node: '>=16.0.0'}
 
+  '@rspack/plugin-react-refresh@1.0.0-alpha.5':
+    resolution: {integrity: sha512-qyTYh1CsHQOjh6hxKIpiWgH18uwNj4+renv5U5nDIHixz7b8f96PYIP+Ptc9BnNklkc4BivF2RHpSNTsYeZ3fQ==}
+    peerDependencies:
+      react-refresh: '>=0.10.0 <1.0.0'
+    peerDependenciesMeta:
+      react-refresh:
+        optional: true
+
   '@rushstack/eslint-patch@1.3.3':
     resolution: {integrity: sha512-0xd7qez0AQ+MbHatZTlI1gu5vkG8r7MYRUJAHPAHJBmGLs16zpkrpAVLvjQKQOqaXPDUBwOiJzNc00znHSCVBw==}
 
@@ -7597,6 +7608,9 @@ packages:
   error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
 
+  error-stack-parser@2.1.4:
+    resolution: {integrity: sha512-Sk5V6wVazPhq5MhpO+AUxJn5x7XSXGl1R93Vn7i+zS15KDVxQijejNCrz8340/2bgLBjR9GtEG8ZVKONDjcqGQ==}
+
   es-abstract@1.20.2:
     resolution: {integrity: sha512-XxXQuVNrySBNlEkTYJoDNFe5+s2yIOpzq80sUHEdPdQr0S5nTLz4ZPPPswNIpKseDDUS5yghX1gfLIHQZ1iNuQ==}
     engines: {node: '>= 0.4'}
@@ -8763,6 +8777,9 @@ packages:
   html-encoding-sniffer@3.0.0:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==}
     engines: {node: '>=12'}
+
+  html-entities@2.5.2:
+    resolution: {integrity: sha512-K//PSRMQk4FZ78Kyau+mZurHn3FH0Vwr+H36eE0rPbeYkRRi9YxceYPhuN60UwWorxyKHhqoAJl2OFKa4BVtaA==}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
@@ -13553,6 +13570,9 @@ packages:
   stack-utils@2.0.6:
     resolution: {integrity: sha512-XlkWvfIm6RmsWtNJx+uqtKLS8eqFbxUg0ZzLXqY0caEy9l7hruX8IpiDnjsLavoBgqCCR71TqWO8MaXYheJ3RQ==}
     engines: {node: '>=10'}
+
+  stackframe@1.3.4:
+    resolution: {integrity: sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==}
 
   stacktrace-parser@0.1.10:
     resolution: {integrity: sha512-KJP1OCML99+8fhOHxwwzyWrlUuVX5GQ0ZpJTd1DFXhdkrvg1szxfHhawXUZ3g9TkXORQd4/WG68jMlQZ2p8wlg==}
@@ -19047,6 +19067,13 @@ snapshots:
 
   '@rspack/lite-tapable@1.0.0-alpha.5': {}
 
+  '@rspack/plugin-react-refresh@1.0.0-alpha.5(react-refresh@0.12.0)':
+    dependencies:
+      error-stack-parser: 2.1.4
+      html-entities: 2.5.2
+    optionalDependencies:
+      react-refresh: 0.12.0
+
   '@rushstack/eslint-patch@1.3.3': {}
 
   '@shuding/opentype.js@1.4.0-beta.0':
@@ -22558,6 +22585,10 @@ snapshots:
     dependencies:
       is-arrayish: 0.2.1
 
+  error-stack-parser@2.1.4:
+    dependencies:
+      stackframe: 1.3.4
+
   es-abstract@1.20.2:
     dependencies:
       call-bind: 1.0.2
@@ -24231,6 +24262,8 @@ snapshots:
   html-encoding-sniffer@3.0.0:
     dependencies:
       whatwg-encoding: 2.0.0
+
+  html-entities@2.5.2: {}
 
   html-escaper@2.0.2: {}
 
@@ -30202,6 +30235,8 @@ snapshots:
   stack-utils@2.0.6:
     dependencies:
       escape-string-regexp: 2.0.0
+
+  stackframe@1.3.4: {}
 
   stacktrace-parser@0.1.10:
     dependencies:

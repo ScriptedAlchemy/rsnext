@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import ReactRefreshWebpackPlugin from 'next/dist/compiled/@next/react-refresh-utils/dist/ReactRefreshWebpackPlugin'
+import ReactReFreshPlugin from '@rspack/plugin-react-refresh'
+//import ReactRefreshWebpackPlugin from 'next/dist/compiled/@next/react-refresh-utils/dist/ReactRefreshWebpackPlugin'
 import { yellow, bold } from '../lib/picocolors'
 import crypto from 'crypto'
 import { webpack } from 'next/dist/compiled/webpack/webpack'
@@ -486,7 +487,7 @@ export default async function getBaseWebpackConfig(
         rootDir: dir,
         pagesDir,
         appDir,
-        hasReactRefresh: false,
+        hasReactRefresh: dev && isClient,
         nextConfig: config,
         jsConfig,
         transpilePackages: finalTranspilePackages,
@@ -730,9 +731,9 @@ export default async function getBaseWebpackConfig(
       isNodeServer ? new OptionalPeerDependencyResolverPlugin() : undefined,
     ].filter(Boolean) as webpack.ResolvePluginInstance[],
     tsConfig: {
-      configFile: path.resolve(dir, 'tsconfig.json')
-    }
-  } as any;
+      configFile: path.resolve(dir, 'tsconfig.json'),
+    },
+  } as any
 
   const terserOptions: any = {
     parse: {
@@ -1761,7 +1762,7 @@ export default async function getBaseWebpackConfig(
           }
         ),
       dev && new MemoryWithGcCachePlugin({ maxGenerations: 5 }),
-      // dev && isClient && new ReactRefreshWebpackPlugin(webpack),
+      dev && isClient && new ReactReFreshPlugin(),
       // Makes sure `Buffer` and `process` are polyfilled in client and flight bundles (same behavior as webpack 4)
       (isClient || isEdgeServer) &&
         new webpack.ProvidePlugin({
