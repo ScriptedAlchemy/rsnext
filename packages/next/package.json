@@ -101,7 +101,7 @@
     "postcss": "8.4.31",
     "source-map-support": "0.5.21",
     "styled-jsx": "5.1.6",
-    "@rspack/core": "1.0.0-alpha.5",
+    "@rspack/core": "npm:@rspack/core-canary@1.0.0-canary-01f95e6-20240809044210",
     "@rspack/plugin-react-refresh": "1.0.0-alpha.5",
     "enhanced-resolve": "5.17.1"
   },

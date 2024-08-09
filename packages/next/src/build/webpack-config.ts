@@ -929,11 +929,10 @@ export default async function getBaseWebpackConfig(
                 dependencyType,
                 contextInfo?.issuerLayer as WebpackLayerName,
                 (options) => {
-                  const { ResolverFactory } = require('enhanced-resolve')
-                  const myResolver = ResolverFactory.createResolver(options)
+                  const resolveFunction = getResolve(options)
                   return (resolveContext: string, requestToResolve: string) =>
                     new Promise((resolve, reject) => {
-                      myResolver.resolve(
+                      resolveFunction(
                         resolveContext,
                         requestToResolve,
                         (err: any, result: any, resolveData: any) => {
