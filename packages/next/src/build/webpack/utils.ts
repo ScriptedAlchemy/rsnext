@@ -19,6 +19,7 @@ export function traverseModules(
   ) => any,
   filterChunkGroup?: (chunkGroup: ChunkGroup) => boolean
 ) {
+  if(!compilation.chunkGroups) return;
   compilation.chunkGroups.forEach((chunkGroup) => {
     if (filterChunkGroup && !filterChunkGroup(chunkGroup)) {
       return
@@ -46,42 +47,45 @@ export function forEachEntryModule(
   compilation: any,
   callback: ({ name, entryModule }: { name: string; entryModule: any }) => void
 ) {
-  for (const [name, entry] of compilation.entries.entries()) {
-    // Skip for entries under pages/
-    if (
-      name.startsWith('pages/') ||
-      // Skip for route.js entries
-      (name.startsWith('app/') && isAppRouteRoute(name))
-    ) {
-      continue
+  debugger;
+  if(compilation.entries) {
+    for (const [name, entry] of compilation.entries.entries()) {
+      // Skip for entries under pages/
+      if (
+        name.startsWith('pages/') ||
+        // Skip for route.js entries
+        (name.startsWith('app/') && isAppRouteRoute(name))
+      ) {
+        continue
+      }
+
+      // Check if the page entry is a server component or not.
+      const entryDependency: NormalModule | undefined = entry.dependencies?.[0]
+      // Ensure only next-app-loader entries are handled.
+      if (!entryDependency || !entryDependency.request) continue
+
+      const request = entryDependency.request
+
+      if (
+        !request.startsWith('next-edge-ssr-loader?') &&
+        !request.startsWith('next-app-loader?')
+      )
+        continue
+
+      let entryModule: NormalModule =
+        compilation.moduleGraph.getResolvedModule(entryDependency)
+
+      if (request.startsWith('next-edge-ssr-loader?')) {
+        entryModule.dependencies.forEach((dependency) => {
+          const modRequest: string | undefined = (dependency as any).request
+          if (modRequest?.includes('next-app-loader')) {
+            entryModule = compilation.moduleGraph.getResolvedModule(dependency)
+          }
+        })
+      }
+
+      callback({ name, entryModule })
     }
-
-    // Check if the page entry is a server component or not.
-    const entryDependency: NormalModule | undefined = entry.dependencies?.[0]
-    // Ensure only next-app-loader entries are handled.
-    if (!entryDependency || !entryDependency.request) continue
-
-    const request = entryDependency.request
-
-    if (
-      !request.startsWith('next-edge-ssr-loader?') &&
-      !request.startsWith('next-app-loader?')
-    )
-      continue
-
-    let entryModule: NormalModule =
-      compilation.moduleGraph.getResolvedModule(entryDependency)
-
-    if (request.startsWith('next-edge-ssr-loader?')) {
-      entryModule.dependencies.forEach((dependency) => {
-        const modRequest: string | undefined = (dependency as any).request
-        if (modRequest?.includes('next-app-loader')) {
-          entryModule = compilation.moduleGraph.getResolvedModule(dependency)
-        }
-      })
-    }
-
-    callback({ name, entryModule })
   }
 }
 

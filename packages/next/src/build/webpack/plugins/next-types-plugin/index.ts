@@ -678,43 +678,43 @@ export class NextTypesPlugin {
             pluginState.routeTypes.node.dynamic = ''
             pluginState.routeTypes.node.static = ''
           }
+          if(compilation.chunkGroups) {
+            compilation.chunkGroups.forEach((chunkGroup) => {
+              chunkGroup.chunks.forEach((chunk) => {
+                if (!chunk.name) return
 
-          compilation.chunkGroups.forEach((chunkGroup) => {
-            chunkGroup.chunks.forEach((chunk) => {
-              if (!chunk.name) return
-
-              // Here we only track page and route chunks.
-              if (
-                !chunk.name.startsWith('pages/') &&
-                !(
-                  chunk.name.startsWith('app/') &&
-                  (chunk.name.endsWith('/page') ||
-                    chunk.name.endsWith('/route'))
-                )
-              ) {
-                return
-              }
-
-              const chunkModules =
-                compilation.chunkGraph.getChunkModulesIterable(
-                  chunk
-                ) as Iterable<webpack.NormalModule>
-              for (const mod of chunkModules) {
-                promises.push(handleModule(mod, assets))
-
-                // If this is a concatenation, register each child to the parent ID.
-                const anyModule = mod as unknown as {
-                  modules: webpack.NormalModule[]
+                // Here we only track page and route chunks.
+                if (
+                  !chunk.name.startsWith('pages/') &&
+                  !(
+                    chunk.name.startsWith('app/') &&
+                    (chunk.name.endsWith('/page') ||
+                      chunk.name.endsWith('/route'))
+                  )
+                ) {
+                  return
                 }
-                if (anyModule.modules) {
-                  anyModule.modules.forEach((concatenatedMod) => {
-                    promises.push(handleModule(concatenatedMod, assets))
-                  })
+
+                const chunkModules =
+                  compilation.chunkGraph.getChunkModulesIterable(
+                    chunk
+                  ) as Iterable<webpack.NormalModule>
+                for (const mod of chunkModules) {
+                  promises.push(handleModule(mod, assets))
+
+                  // If this is a concatenation, register each child to the parent ID.
+                  const anyModule = mod as unknown as {
+                    modules: webpack.NormalModule[]
+                  }
+                  if (anyModule.modules) {
+                    anyModule.modules.forEach((concatenatedMod) => {
+                      promises.push(handleModule(concatenatedMod, assets))
+                    })
+                  }
                 }
-              }
+              })
             })
-          })
-
+          }
           await Promise.all(promises)
 
           // Support `"moduleResolution": "Node16" | "NodeNext"` with `"type": "module"`

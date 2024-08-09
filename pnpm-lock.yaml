@@ -711,6 +711,31 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
 
+  examples/basic-css:
+    dependencies:
+      next:
+        specifier: latest
+        version: link:../../packages/next
+      react:
+        specifier: 19.0.0-rc-6230622a1a-20240610
+        version: 19.0.0-rc-6230622a1a-20240610
+      react-dom:
+        specifier: 19.0.0-rc-6230622a1a-20240610
+        version: 19.0.0-rc-6230622a1a-20240610(react@19.0.0-rc-6230622a1a-20240610)
+    devDependencies:
+      '@types/node':
+        specifier: 20.12.3
+        version: 20.12.3
+      '@types/react':
+        specifier: npm:types-react@19.0.0-rc.0
+        version: types-react@19.0.0-rc.0
+      '@types/react-dom':
+        specifier: npm:types-react-dom@19.0.0-rc.0
+        version: types-react-dom@19.0.0-rc.0
+      typescript:
+        specifier: ^4.7.4
+        version: 4.8.4
+
   examples/next-css:
     dependencies:
       next:
