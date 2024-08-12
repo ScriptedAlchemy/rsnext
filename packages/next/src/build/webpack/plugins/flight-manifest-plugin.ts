@@ -190,14 +190,18 @@ export class ClientReferenceManifestPlugin {
     compiler.hooks.compilation.tap(
       PLUGIN_NAME,
       (compilation, { normalModuleFactory }) => {
-        compilation.dependencyFactories.set(
-          webpack.dependencies.ModuleDependency,
-          normalModuleFactory
-        )
-        compilation.dependencyTemplates.set(
-          webpack.dependencies.ModuleDependency,
-          new webpack.dependencies.NullDependency.Template()
-        )
+        if(compilation.dependencyFactories) {
+          compilation.dependencyFactories.set(
+            webpack.dependencies.ModuleDependency,
+            normalModuleFactory
+          )
+        }
+        if(compilation.dependencyTemplates) {
+          compilation.dependencyTemplates.set(
+            webpack.dependencies.ModuleDependency,
+            new webpack.dependencies.NullDependency.Template()
+          )
+        }
         compilation.hooks.processAssets.tap(
           {
             name: PLUGIN_NAME,
@@ -444,10 +448,12 @@ export class ClientReferenceManifestPlugin {
             }
           }
         })
+        if(chunkGroup.childrenIterable) {
 
-        // Walk through all children chunk groups too.
-        for (const child of chunkGroup.childrenIterable) {
-          recordChunkGroup(child)
+          // Walk through all children chunk groups too.
+          for (const child of chunkGroup.childrenIterable) {
+            recordChunkGroup(child)
+          }
         }
       }
 

@@ -184,14 +184,18 @@ export class FlightClientEntryPlugin {
     compiler.hooks.compilation.tap(
       PLUGIN_NAME,
       (compilation, { normalModuleFactory }) => {
-        compilation.dependencyFactories.set(
-          webpack.dependencies.ModuleDependency,
-          normalModuleFactory
-        )
-        compilation.dependencyTemplates.set(
-          webpack.dependencies.ModuleDependency,
-          new webpack.dependencies.NullDependency.Template()
-        )
+        if(compilation.dependencyFactories) {
+          compilation.dependencyFactories.set(
+            webpack.dependencies.ModuleDependency,
+            normalModuleFactory
+          )
+        }
+        if(compilation.dependencyTemplates) {
+          compilation.dependencyTemplates.set(
+            webpack.dependencies.ModuleDependency,
+            new webpack.dependencies.NullDependency.Template()
+          )
+        }
       }
     )
 
@@ -304,6 +308,7 @@ export class FlightClientEntryPlugin {
             resolvedModule: connection.resolvedModule,
           })
 
+
         actionImports.forEach(([dep, names]) =>
           actionEntryImports.set(dep, names)
         )
@@ -410,26 +415,24 @@ export class FlightClientEntryPlugin {
         ])
       }
     })
-
-    for (const [name, actionEntryImports] of Object.entries(
-      actionMapsPerEntry
-    )) {
-      for (const [dep, actionNames] of actionEntryImports) {
-        for (const actionName of actionNames) {
-          createdActions.add(name + '@' + dep + '@' + actionName)
+      for (const [name, actionEntryImports] of Object.entries(
+        actionMapsPerEntry
+      )) {
+        for (const [dep, actionNames] of actionEntryImports) {
+          for (const actionName of actionNames) {
+            createdActions.add(name + '@' + dep + '@' + actionName)
+          }
         }
+        addActionEntryList.push(
+          this.injectActionEntry({
+            compiler,
+            compilation,
+            actions: actionEntryImports,
+            entryName: name,
+            bundlePath: name,
+          })
+        )
       }
-      addActionEntryList.push(
-        this.injectActionEntry({
-          compiler,
-          compilation,
-          actions: actionEntryImports,
-          entryName: name,
-          bundlePath: name,
-        })
-      )
-    }
-
     // Invalidate in development to trigger recompilation
     const invalidator = getInvalidator(compiler.outputPath)
     // Check if any of the entry injections need an invalidation
