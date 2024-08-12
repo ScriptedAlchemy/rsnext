@@ -2,5 +2,8 @@ packages:
   - 'packages/*'
   - 'bench/*'
   - 'packages/next-swc/crates/next-core/js'
+ # - 'turbopack/crates/*/js'
+ # - 'turbopack/crates/turbopack-tests/tests/execution'
+  - 'turbopack/packages/*'
   - 'examples/next-css'
   - 'examples/basic-css'

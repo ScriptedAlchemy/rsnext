@@ -25,19 +25,23 @@ export class AppBuildManifestPlugin {
   }
 
   public apply(compiler: any) {
-    // compiler.hooks.compilation.tap(
-    //   PLUGIN_NAME,
-    //   (compilation: any, { normalModuleFactory }: any) => {
-    //     compilation.dependencyFactories.set(
-    //       webpack.dependencies.ModuleDependency,
-    //       normalModuleFactory
-    //     )
-    //     compilation.dependencyTemplates.set(
-    //       webpack.dependencies.ModuleDependency,
-    //       new webpack.dependencies.NullDependency.Template()
-    //     )
-    //   }
-    // )
+    compiler.hooks.compilation.tap(
+      PLUGIN_NAME,
+      (compilation: any, { normalModuleFactory }: any) => {
+        if(compilation.dependencyFactories) {
+          compilation.dependencyFactories.set(
+            webpack.dependencies.ModuleDependency,
+            normalModuleFactory
+          )
+        }
+        if(compilation.dependencyTemplates) {
+          compilation.dependencyTemplates.set(
+            webpack.dependencies.ModuleDependency,
+            new webpack.dependencies.NullDependency.Template()
+          )
+        }
+      }
+    )
 
     compiler.hooks.make.tap(PLUGIN_NAME, (compilation: any) => {
       compilation.hooks.processAssets.tap(
@@ -54,12 +58,20 @@ export class AppBuildManifestPlugin {
     const manifest: AppBuildManifest = {
       pages: {},
     }
-
+   const getAssets = compilation.getAssets();
+    const stats = compilation.getStats().toJson();
+    const entr = Array.from(compilation.entries.keys())
+    const entrypoints = compilation.entrypoints.keys();
+    const gotEntry = compilation.entrypoints.get(CLIENT_STATIC_FILES_RUNTIME_MAIN_APP);
+    // debugger;
+console.log('static files', compilation.entrypoints.get(CLIENT_STATIC_FILES_RUNTIME_MAIN_APP), CLIENT_STATIC_FILES_RUNTIME_MAIN_APP);
     const mainFiles = new Set(
       getEntrypointFiles(
         compilation.entrypoints.get(CLIENT_STATIC_FILES_RUNTIME_MAIN_APP)
       )
     )
+
+    console.log('app mainFiles', mainFiles)
 
     for (const entrypoint of compilation.entrypoints.values()) {
       if (!entrypoint.name) {
